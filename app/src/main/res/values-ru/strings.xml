@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VBV Remote</string>
+    <string name="about_text">Розробник додатка ПП \"Програміст\". Із зауваженнями та пропозиціями звертайтесь на адресу support@programmer.com.ua</string>
+    <string name="submit_request">Запит</string>
+    <string name="document">Документ</string>
+    <string name="document_number">Номер: %s</string>
+    <string name="status">Статус: %s</string>
+    <string name="barcode_hint">Введіть або проскануйте штрихкод</string>
+    <string name="scanner_icon_description">Запуск сканера штрихкодів</string>
+    <string name="title_about">Про додаток</string>
+    <string name="title_login">Обробка замовлень</string>
+    <string name="title_settings">Налаштування</string>
+    <string name="api_request_text">Запит статусу...</string>
+    <string name="app_version">Версія: %s</string>
+    <string name="device_id">Ідентифікатор: %s</string>
+    <string name="title_scanner">Сканер штрихкода</string>
+</resources>

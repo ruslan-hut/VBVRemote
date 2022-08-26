@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="ua.com.programmer.vbvremote.LoginFragment"
+        android:label="@string/title_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="ua.com.programmer.vbvremote.about.AboutFragment"
+        android:label="@string/title_about" />
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="ua.com.programmer.vbvremote.scanner.ScannerFragment"
+        android:label="@string/title_scanner" />
+</navigation>
