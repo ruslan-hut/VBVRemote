@@ -26,12 +26,16 @@ class LoginViewModel: ViewModel() {
         get() = _number
 
     init {
-        _number.value = ""
-        _status.value = ""
+        resetDocumentData()
     }
 
     fun requestDataWithBarcode(barcodeValue: String){
         getOrder(barcodeValue)
+    }
+
+    fun resetDocumentData() {
+        _number.value = ""
+        _status.value = ""
     }
 
     fun setStatus(text: String) {

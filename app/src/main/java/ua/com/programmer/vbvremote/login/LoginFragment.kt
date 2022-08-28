@@ -37,6 +37,7 @@ class LoginFragment : Fragment() {
 
         binding.barcodeField.setEndIconOnClickListener {
             binding.textBarcodeEditText.setText("")
+            viewModel.resetDocumentData()
             findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
         }
 
