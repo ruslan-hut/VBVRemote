@@ -1,4 +1,4 @@
-package ua.com.programmer.vbvremote
+package ua.com.programmer.vbvremote.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentLoginBinding
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
