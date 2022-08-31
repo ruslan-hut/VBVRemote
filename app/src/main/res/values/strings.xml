@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_text">App is developed by Programmer. You can send reports and suggestions to support@programmer.com.ua</string>
-    <string name="submit_request">Submit</string>
+    <string name="submit_request">Request status</string>
     <string name="document">Document</string>
     <string name="document_number">Number: %s</string>
     <string name="status">Status: %s</string>
@@ -12,8 +12,11 @@
     <string name="title_login">Process documents</string>
     <string name="app_name">One By One</string>
     <string name="title_settings">Settings</string>
-    <string name="api_request_text">Requesting status...</string>
+    <string name="api_request_text">Requesting status…</string>
     <string name="app_version">Version: %s</string>
     <string name="device_id">Device ID: %s</string>
     <string name="title_scanner">Barcode scanner</string>
+    <string name="pause">Pause processing</string>
+    <string name="start">Start processing</string>
+    <string name="finish">Finish processing</string>
 </resources>

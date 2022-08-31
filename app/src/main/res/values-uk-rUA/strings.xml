@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">One By One</string>
     <string name="about_text">Розробник додатка ПП \"Програміст\". Із зауваженнями та пропозиціями звертайтесь на адресу support@programmer.com.ua</string>
-    <string name="submit_request">Запит</string>
+    <string name="submit_request">Запит поточного статуса</string>
     <string name="document">Документ</string>
     <string name="document_number">Номер: %s</string>
     <string name="status">Статус: %s</string>
@@ -11,8 +11,11 @@
     <string name="title_about">Про додаток</string>
     <string name="title_login">Обробка замовлень</string>
     <string name="title_settings">Налаштування</string>
-    <string name="api_request_text">Запит статусу...</string>
+    <string name="api_request_text">Запит статусу…</string>
     <string name="app_version">Версія: %s</string>
     <string name="device_id">Ідентифікатор: %s</string>
     <string name="title_scanner">Сканер штрихкода</string>
+    <string name="pause">Пауза в роботі</string>
+    <string name="start">Розпочати виконання</string>
+    <string name="finish">Завершити</string>
 </resources>

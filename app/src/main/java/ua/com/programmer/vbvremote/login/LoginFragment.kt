@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentLoginBinding
+import ua.com.programmer.vbvremote.network.Event
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
 
@@ -34,6 +35,9 @@ class LoginFragment : Fragment() {
         binding.textBarcodeEditText.setText(R.string.default_barcode)
 
         binding.submit.setOnClickListener { requestDataWithBarcode() }
+        binding.pause.setOnClickListener { requestJobPause() }
+        binding.start.setOnClickListener { requestJobStart() }
+        binding.finish.setOnClickListener { requestJobFinish() }
 
         binding.barcodeField.setEndIconOnClickListener {
             binding.textBarcodeEditText.setText("")
@@ -46,9 +50,22 @@ class LoginFragment : Fragment() {
     }
 
     private fun requestDataWithBarcode() {
+        viewModel.resetDocumentData()
         viewModel.setStatus(getString(R.string.api_request_text))
-        val barcode = binding.textBarcodeEditText.text.toString()
-        viewModel.requestDataWithBarcode(barcode)
+        viewModel.setBarcode(binding.textBarcodeEditText.text.toString())
+        viewModel.requestData(Event.STATUS)
+    }
+
+    private fun requestJobPause() {
+        viewModel.requestData(Event.PAUSE)
+    }
+
+    private fun requestJobStart() {
+        viewModel.requestData(Event.START)
+    }
+
+    private fun requestJobFinish() {
+        viewModel.requestData(Event.STOP)
     }
 
     override fun onResume() {
