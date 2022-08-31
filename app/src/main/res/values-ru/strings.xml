@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">VBV Remote</string>
+    <string name="app_name">One By One</string>
     <string name="about_text">Розробник додатка ПП \"Програміст\". Із зауваженнями та пропозиціями звертайтесь на адресу support@programmer.com.ua</string>
     <string name="submit_request">Запит</string>
     <string name="document">Документ</string>

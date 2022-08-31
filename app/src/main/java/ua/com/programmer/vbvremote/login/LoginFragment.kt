@@ -57,7 +57,10 @@ class LoginFragment : Fragment() {
         val currentText = binding.textBarcodeEditText.text.toString()
         if (currentText.isBlank()) {
             val barcode = settings.read(BARCODE_KEY)
-            if (barcode.isNotBlank()) binding.textBarcodeEditText.setText(barcode)
+            if (barcode.isNotBlank()) {
+                binding.textBarcodeEditText.setText(barcode)
+                requestDataWithBarcode()
+            }
         }
     }
 }
