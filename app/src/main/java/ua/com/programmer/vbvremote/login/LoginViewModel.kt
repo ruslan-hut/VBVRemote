@@ -14,6 +14,8 @@ import java.lang.Exception
 
 class LoginViewModel: ViewModel() {
 
+    private lateinit var userId: String
+
     private val _status = MutableLiveData<String>()
     val status: LiveData<String>
         get() = _status
@@ -27,6 +29,10 @@ class LoginViewModel: ViewModel() {
 
     init {
         resetDocumentData()
+    }
+
+    fun setUserId(id: String) {
+        userId = id
     }
 
     fun requestDataWithBarcode(barcodeValue: String){
@@ -45,7 +51,7 @@ class LoginViewModel: ViewModel() {
     private fun getOrder(barcodeValue: String) {
         _number.value = ""
 
-        val barcode = Barcode(barcodeValue)
+        val barcode = Barcode(barcodeValue, userId)
 
         viewModelScope.launch {
             try {

@@ -42,6 +42,7 @@ class LoginFragment : Fragment() {
         }
 
         settings = SettingsHelper(requireContext())
+        viewModel.setUserId(settings.userID())
     }
 
     private fun requestDataWithBarcode() {
