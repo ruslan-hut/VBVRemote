@@ -58,7 +58,7 @@ class LoginViewModel: ViewModel() {
     private fun doRequest(event: Event) {
         _message.value = ""
 
-        val requestBody = RequestBody(currentBarcode, userId, eventToString(Event.STATUS))
+        val requestBody = RequestBody(currentBarcode, userId, eventToString(event))
 
         viewModelScope.launch {
             try {
