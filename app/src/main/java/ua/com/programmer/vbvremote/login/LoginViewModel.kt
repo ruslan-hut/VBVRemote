@@ -80,12 +80,12 @@ class LoginViewModel: ViewModel() {
                 val response = VBVApi.retrofitService.getOrder(requestBody)
 
                 resetDocumentData()
+                _currentDocument.value = response.document
+                _message.value = _currentDocument.value?.message
 
                 _apiStatus.value = response.status
-                _currentDocument.value = response.document
-                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
-                _message.value = _currentDocument.value?.message
+                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
                 if (_apiStatus.value == STATUS_OK) {
                     _status.value = _currentDocument.value?.status

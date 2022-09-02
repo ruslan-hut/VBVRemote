@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentLoginBinding
 import ua.com.programmer.vbvremote.network.Event
+import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
 
@@ -48,6 +51,21 @@ class LoginFragment : Fragment() {
         settings = SettingsHelper(requireContext())
         viewModel.setUserId(settings.userID())
         //viewModel.setBarcode(settings.read(BARCODE_KEY))
+
+        viewModel.apiStatus.observe(viewLifecycleOwner) {
+            if (it == STATUS_ERROR) {
+                showErrorStatus()
+            }
+        }
+    }
+
+    private fun showErrorStatus() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.warning)
+            .setMessage(getString(R.string.operation_cancelled, viewModel.message.value.toString()))
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, null)
+            .show()
     }
 
     private fun requestData(event: Event) {
