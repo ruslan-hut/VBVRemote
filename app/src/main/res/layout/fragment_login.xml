@@ -118,7 +118,7 @@
                 style="@style/Widget.VBVRemote.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="32dp"
                 android:hint="@string/barcode_hint"
                 app:endIconContentDescription="@string/scanner_icon_description"
