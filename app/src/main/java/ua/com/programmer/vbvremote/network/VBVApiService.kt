@@ -10,6 +10,7 @@ import retrofit2.http.POST
 
 const val BASE_URL = "http://77.222.159.188:8081/1c/ru/hs/apiModel/"
 const val STATUS_OK = "success"
+const val STATUS_ERROR = "fail"
 
 enum class Event {STATUS, START, STOP, PAUSE}
 

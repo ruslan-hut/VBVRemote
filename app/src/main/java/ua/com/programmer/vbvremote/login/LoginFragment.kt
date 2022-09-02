@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
 
         binding.loginViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.textBarcodeEditText.setText(R.string.default_barcode)
+        //binding.textBarcodeEditText.setText(R.string.default_barcode)
 
         binding.submit.setOnClickListener { requestDataWithBarcode() }
         binding.pause.setOnClickListener { requestJobPause() }
@@ -47,6 +47,12 @@ class LoginFragment : Fragment() {
 
         settings = SettingsHelper(requireContext())
         viewModel.setUserId(settings.userID())
+        //viewModel.setBarcode(settings.read(BARCODE_KEY))
+    }
+
+    private fun requestData(event: Event) {
+        val currentText = binding.textBarcodeEditText.text.toString()
+
     }
 
     private fun requestDataWithBarcode() {
@@ -75,6 +81,7 @@ class LoginFragment : Fragment() {
         if (currentText.isBlank()) {
             val barcode = settings.read(BARCODE_KEY)
             if (barcode.isNotBlank()) {
+                viewModel.setBarcode(barcode)
                 binding.textBarcodeEditText.setText(barcode)
                 requestDataWithBarcode()
             }

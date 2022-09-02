@@ -12,7 +12,14 @@ import java.lang.Exception
 class LoginViewModel: ViewModel() {
 
     private lateinit var userId: String
-    private var currentBarcode = ""
+
+    private var _barcode = MutableLiveData<String>()
+    val barcode: LiveData<String>
+        get() = _barcode
+
+    private var _apiStatus = MutableLiveData<String>()
+    val apiStatus: LiveData<String>
+        get() = _apiStatus
 
     private val _status = MutableLiveData<String>()
     val status: LiveData<String>
@@ -38,7 +45,8 @@ class LoginViewModel: ViewModel() {
     }
 
     fun setBarcode(value: String) {
-        currentBarcode = value
+        Log.d("XBUG", "Barcode: $value")
+        _barcode.value = value
     }
 
     fun requestData(event: Event) {
@@ -49,6 +57,7 @@ class LoginViewModel: ViewModel() {
         _number.value = ""
         _status.value = ""
         _message.value = ""
+        _apiStatus.value = ""
     }
 
     fun setStatus(text: String) {
@@ -57,21 +66,32 @@ class LoginViewModel: ViewModel() {
 
     private fun doRequest(event: Event) {
         _message.value = ""
+        val currentBarcode = _barcode.value
+        if (currentBarcode == null || currentBarcode.isBlank()) {
+            _message.value = "NO BARCODE"
+            return
+        }
 
         val requestBody = RequestBody(currentBarcode, userId, eventToString(event))
+        Log.d("XBUG", "Request: $requestBody")
 
         viewModelScope.launch {
             try {
                 val response = VBVApi.retrofitService.getOrder(requestBody)
-                if (response.status == STATUS_OK) {
-                    _currentDocument.value = response.document
+
+                resetDocumentData()
+
+                _apiStatus.value = response.status
+                _currentDocument.value = response.document
+                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
+
+                _message.value = _currentDocument.value?.message
+
+                if (_apiStatus.value == STATUS_OK) {
                     _status.value = _currentDocument.value?.status
                     _number.value = _currentDocument.value?.number
-                    _message.value = _currentDocument.value?.message
-                } else {
-                    _message.value = "Api response status: ${response.status}"
-                    _status.value = ""
                 }
+
             }catch (e: Exception){
                 _message.value = "Failure: ${e.message}"
                 _status.value = ""
