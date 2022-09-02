@@ -1,6 +1,7 @@
 
 package ua.com.programmer.vbvremote.about
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,5 +32,21 @@ class AboutFragment : Fragment() {
 
         binding.aboutViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.userIdText.setOnLongClickListener {
+            sendUserId()
+        }
+    }
+
+    private fun sendUserId(): Boolean {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, viewModel.userID)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+        return true
     }
 }
