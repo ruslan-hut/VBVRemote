@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurfaceVariant">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:padding="16dp"
@@ -27,7 +28,7 @@
                 android:drawableEnd="@drawable/baseline_question_mark_white_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textStatus" />
+                app:layout_constraintTop_toBottomOf="@+id/warningMessage" />
 
             <Button
                 android:id="@+id/start"
@@ -69,49 +70,69 @@
                 android:padding="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minLines="3"
+                android:maxLines="3"
                 android:text="@string/document"
-                android:textColor="@color/md_theme_light_error"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/barcodeField"
+                app:layout_constraintTop_toBottomOf="@+id/documentInfo"
                 tools:text="@{loginViewModel.message}"/>
 
-            <TextView
-                android:textSize="18sp"
-                android:id="@+id/textTitle"
-                android:padding="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/document"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/warningMessage" />
-
-            <TextView
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:id="@+id/textDocumentNumber"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/documentInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/document_number"
+                app:cardCornerRadius="16dp"
+                android:layout_marginTop="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textTitle"
-                tools:text="@{@string/document_number(loginViewModel.number)}"/>
+                app:layout_constraintTop_toBottomOf="@+id/barcodeField">
 
-            <TextView
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="?attr/colorTertiary"
-                android:id="@+id/textStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/status"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDocumentNumber"
-                tools:text="@{@string/status(loginViewModel.status)}"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:id="@+id/textTitle"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/document"
+                        />
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:id="@+id/textDocumentNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/document_number"
+
+                        tools:text="@{@string/document_number(loginViewModel.number)}"/>
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorTertiary"
+                        android:id="@+id/textStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status"
+                        android:minLines="2"
+                        tools:text="@{@string/status(loginViewModel.status)}"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/barcodeField"
@@ -119,7 +140,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="@dimen/default_margin"
                 android:hint="@string/barcode_hint"
                 app:endIconContentDescription="@string/scanner_icon_description"
                 app:endIconDrawable="@drawable/baseline_qr_code_scanner_24"
@@ -134,6 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPersonName|textNoSuggestions"
+                    android:textStyle="bold"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
