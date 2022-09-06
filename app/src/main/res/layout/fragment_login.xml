@@ -15,7 +15,7 @@
         android:background="?attr/colorSurfaceVariant">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:padding="16dp"
+            android:padding="@dimen/default_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -23,7 +23,7 @@
                 android:id="@+id/submit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/half_margin"
                 android:text="@string/submit_request"
                 android:drawableEnd="@drawable/baseline_question_mark_white_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/start"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/half_margin"
                 android:text="@string/start"
                 android:drawableEnd="@drawable/baseline_play_arrow_white_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
                 android:id="@+id/pause"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/half_margin"
                 android:text="@string/pause"
                 android:drawableEnd="@drawable/baseline_pause_white_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                 android:id="@+id/finish"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/half_margin"
                 android:text="@string/finish"
                 android:backgroundTint="@color/cardview_dark_background"
                 android:drawableEnd="@drawable/baseline_stop_white_24"
@@ -67,11 +67,11 @@
             <TextView
                 android:textSize="18sp"
                 android:id="@+id/warningMessage"
-                android:padding="16dp"
+                android:padding="@dimen/default_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minLines="3"
-                android:maxLines="3"
+                android:minLines="4"
+                android:maxLines="5"
                 android:text="@string/document"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textStyle="bold"
