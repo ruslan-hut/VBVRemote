@@ -29,10 +29,19 @@ class SettingsHelper(context: Context) {
         return read(userIdKey)
     }
 
+    fun setConnectionDefaults() {
+        preferences.edit().putString("server_address", "77.222.159.188:8081").apply()
+        preferences.edit().putString("api_path", "1c/ru/hs/apiModel").apply()
+    }
+
     fun baseUrl(): String {
-        var url: String
+
         val server = preferences.getString("server_address", "") ?: ""
         val path = preferences.getString("api_path", "") ?: ""
+
+        if (server.isBlank() && path.isBlank()) return ""
+
+        var url: String
         if (server.startsWith("http://") || server.startsWith("https://")) {
             url = server
         }else{
@@ -41,6 +50,7 @@ class SettingsHelper(context: Context) {
         if (!url.endsWith("/", true)) url = "$url/"
         url = "$url$path"
         if (!url.endsWith("/", true)) url = "$url/"
+
         return url
     }
 

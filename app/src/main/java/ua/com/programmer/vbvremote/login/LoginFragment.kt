@@ -50,6 +50,8 @@ class LoginFragment : Fragment() {
         settings = SettingsHelper(requireContext())
         viewModel.setUserId(settings.userID())
 
+        if (settings.baseUrl().isBlank()) settings.setConnectionDefaults()
+
         viewModel.apiStatus.observe(viewLifecycleOwner) {
             if (it == STATUS_ERROR) {
                 showErrorStatus()
