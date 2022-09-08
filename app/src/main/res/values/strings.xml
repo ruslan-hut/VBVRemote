@@ -21,5 +21,9 @@
     <string name="finish">Finish processing</string>
     <string name="warning">Warning</string>
     <string name="operation_cancelled">Operation cancelled. %s</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="pref_title_server_address">Server address</string>
+    <string name="pref_title_api_path">Api root path</string>
+    <string name="pref_title_category_server">Connection parameters</string>
+    <string name="pref_summary_empty_text">Value not set</string>
 </resources>

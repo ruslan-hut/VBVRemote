@@ -1,20 +1,18 @@
 package ua.com.programmer.vbvremote.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.preference.EditTextPreference
+import androidx.preference.PreferenceFragmentCompat
 import ua.com.programmer.vbvremote.R
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.preferences, rootKey)
+
+        val serverAddress: EditTextPreference? = findPreference("server_address")
+        serverAddress?.summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
+
     }
 
 }

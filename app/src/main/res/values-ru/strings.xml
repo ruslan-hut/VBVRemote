@@ -21,4 +21,8 @@
     <string name="warning">Увага</string>
     <string name="operation_cancelled">Операція не виконана. %s</string>
     <string name="ok">Ok</string>
+    <string name="pref_title_server_address">Адреса сервера</string>
+    <string name="pref_title_api_path">Шлях API</string>
+    <string name="pref_title_category_server">Налаштування підключення</string>
+    <string name="pref_summary_empty_text">Значення не вказано</string>
 </resources>

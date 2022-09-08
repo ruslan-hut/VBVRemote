@@ -20,4 +20,8 @@
         android:id="@+id/scannerFragment"
         android:name="ua.com.programmer.vbvremote.scanner.ScannerFragment"
         android:label="@string/title_scanner" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ua.com.programmer.vbvremote.settings.SettingsFragment"
+        android:label="@string/title_settings" />
 </navigation>
