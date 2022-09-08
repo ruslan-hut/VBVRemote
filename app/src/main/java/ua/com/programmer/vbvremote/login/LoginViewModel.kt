@@ -12,10 +12,12 @@ import java.lang.Exception
 class LoginViewModel: ViewModel() {
 
     private lateinit var userId: String
+    private lateinit var baseUrl: String
+    private lateinit var api: VBVApi
 
     private var _barcode = MutableLiveData<String>()
-    val barcode: LiveData<String>
-        get() = _barcode
+    //val barcode: LiveData<String>
+    //    get() = _barcode
 
     private var _apiStatus = MutableLiveData<String>()
     val apiStatus: LiveData<String>
@@ -26,7 +28,7 @@ class LoginViewModel: ViewModel() {
         get() = _status
 
     private val _currentDocument = MutableLiveData<Document>()
-    val currentDocument: LiveData<Document> = _currentDocument
+    //val currentDocument: LiveData<Document> = _currentDocument
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
@@ -44,8 +46,12 @@ class LoginViewModel: ViewModel() {
         userId = id
     }
 
+    fun setBaseUrl(url: String) {
+        baseUrl = url
+        api = VBVApi(baseUrl)
+    }
+
     fun setBarcode(value: String) {
-        Log.d("XBUG", "Barcode: $value")
         _barcode.value = value
     }
 
@@ -73,11 +79,11 @@ class LoginViewModel: ViewModel() {
         }
 
         val requestBody = RequestBody(currentBarcode, userId, eventToString(event))
-        Log.d("XBUG", "Request: $requestBody")
+        //Log.d("XBUG", "Request: $requestBody")
 
         viewModelScope.launch {
             try {
-                val response = VBVApi.retrofitService.getOrder(requestBody)
+                val response = api.retrofitService.getOrder(requestBody)
 
                 resetDocumentData()
                 _currentDocument.value = response.document
@@ -85,7 +91,7 @@ class LoginViewModel: ViewModel() {
 
                 _apiStatus.value = response.status
 
-                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
+                //Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
                 if (_apiStatus.value == STATUS_OK) {
                     _status.value = _currentDocument.value?.status

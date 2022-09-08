@@ -13,6 +13,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val serverAddress: EditTextPreference? = findPreference("server_address")
         serverAddress?.summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
 
+        val apiPath: EditTextPreference? = findPreference("api_path")
+        apiPath?.summaryProvider = EditTextPreference.SimpleSummaryProvider.getInstance()
     }
 
 }

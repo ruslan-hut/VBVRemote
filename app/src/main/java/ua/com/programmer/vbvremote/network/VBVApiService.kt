@@ -8,7 +8,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-const val BASE_URL = "http://77.222.159.188:8081/1c/ru/hs/apiModel/"
 const val STATUS_OK = "success"
 const val STATUS_ERROR = "fail"
 
@@ -23,19 +22,21 @@ fun eventToString(event: Event): String {
     }
 }
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+class VBVApi(baseUrl: String) {
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl(BASE_URL)
-    .build()
+    private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
-object VBVApi {
+    private val retrofit = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .baseUrl(baseUrl)
+        .build()
+
     val retrofitService: VBVApiService by lazy {
         retrofit.create(VBVApiService::class.java)
     }
+
 }
 
 interface VBVApiService {
