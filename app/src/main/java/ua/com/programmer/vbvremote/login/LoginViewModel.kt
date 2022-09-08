@@ -13,7 +13,7 @@ class LoginViewModel: ViewModel() {
 
     private lateinit var userId: String
     private lateinit var baseUrl: String
-    private lateinit var api: VBVApi
+    private var api: VBVApi? = null
 
     private var _barcode = MutableLiveData<String>()
     //val barcode: LiveData<String>
@@ -48,7 +48,7 @@ class LoginViewModel: ViewModel() {
 
     fun setBaseUrl(url: String) {
         baseUrl = url
-        api = VBVApi(baseUrl)
+        if (baseUrl.isNotBlank()) api = VBVApi(baseUrl)
     }
 
     fun setBarcode(value: String) {
@@ -83,13 +83,13 @@ class LoginViewModel: ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = api.retrofitService.getOrder(requestBody)
+                val response = api?.retrofitService?.getOrder(requestBody)
 
                 resetDocumentData()
-                _currentDocument.value = response.document
+                _currentDocument.value = response?.document
                 _message.value = _currentDocument.value?.message
 
-                _apiStatus.value = response.status
+                _apiStatus.value = response?.status
 
                 //Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 

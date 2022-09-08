@@ -88,7 +88,18 @@ class LoginFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.setBaseUrl(settings.baseUrl())
+        val baseUrl = settings.baseUrl()
+        if (baseUrl.isBlank()) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.warning)
+                .setMessage(
+                    R.string.error_no_connection_settings
+                )
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, null)
+                .show()
+        }
+        viewModel.setBaseUrl(baseUrl)
 
         val currentText = binding.textBarcodeEditText.text.toString()
         if (currentText.isBlank()) {
