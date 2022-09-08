@@ -57,7 +57,7 @@ class ScannerFragment : Fragment() {
             if (isGranted) {
                 setupCamera()
             }else{
-                activity?.onBackPressed()
+                activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
 
@@ -124,6 +124,6 @@ class ScannerFragment : Fragment() {
         ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100).startTone(ToneGenerator.TONE_PROP_BEEP)
 
         if (value != null) settings.write(BARCODE_KEY, value)
-        activity?.onBackPressed()
+        activity?.onBackPressedDispatcher?.onBackPressed()
     }
 }

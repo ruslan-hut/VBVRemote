@@ -68,11 +68,6 @@ class LoginFragment : Fragment() {
             .show()
     }
 
-    private fun requestData(event: Event) {
-        val currentText = binding.textBarcodeEditText.text.toString()
-
-    }
-
     private fun requestDataWithBarcode() {
         viewModel.resetDocumentData()
         viewModel.setStatus(getString(R.string.api_request_text))
