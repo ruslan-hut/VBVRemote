@@ -9,3 +9,4 @@
 local.properties
 /.idea/*
 /app/version.properties
+/app/release/
