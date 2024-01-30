@@ -30,7 +30,7 @@ class SettingsHelper(context: Context) {
     }
 
     fun setConnectionDefaults() {
-        preferences.edit().putString("server_address", "77.222.159.188:8081").apply()
+        preferences.edit().putString("server_address", "1c.onebyone.ua").apply()
         preferences.edit().putString("api_path", "1c/ru/hs/apiModel").apply()
     }
 
@@ -42,10 +42,10 @@ class SettingsHelper(context: Context) {
         if (server.isBlank() && path.isBlank()) return ""
 
         var url: String
-        if (server.startsWith("http://") || server.startsWith("https://")) {
-            url = server
+        url = if (server.startsWith("http://") || server.startsWith("https://")) {
+            server
         }else{
-            url = "http://$server"
+            "http://$server"
         }
         if (!url.endsWith("/", true)) url = "$url/"
         url = "$url$path"

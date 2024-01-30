@@ -26,4 +26,7 @@
     <string name="pref_title_category_server">Налаштування підключення</string>
     <string name="pref_summary_empty_text">Значення не вказано</string>
     <string name="error_no_connection_settings">Не вказані налаштування підключення</string>
+    <string name="title_select_workshop">Оберіть цех</string>
+    <string name="workshop_cut">Цех крою</string>
+    <string name="workshop_develop">Цех розробки</string>
 </resources>

@@ -132,14 +132,21 @@
 
             </androidx.cardview.widget.CardView>
 
-
+            <TextView
+                android:id="@+id/workshop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/workshop_develop"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/barcodeField"
                 style="@style/Widget.VBVRemote.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:hint="@string/barcode_hint"
                 app:endIconContentDescription="@string/scanner_icon_description"
@@ -148,7 +155,7 @@
                 app:helperTextTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/workshop">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_barcode_edit_text"

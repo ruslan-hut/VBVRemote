@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/selectWorkshopFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -24,4 +24,12 @@
         android:id="@+id/settingsFragment"
         android:name="ua.com.programmer.vbvremote.settings.SettingsFragment"
         android:label="@string/title_settings" />
+    <fragment
+        android:id="@+id/selectWorkshopFragment"
+        android:name="ua.com.programmer.vbvremote.workshop.SelectWorkshopFragment"
+        android:label="@string/title_select_workshop" >
+        <action
+            android:id="@+id/action_selectWorkshopFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

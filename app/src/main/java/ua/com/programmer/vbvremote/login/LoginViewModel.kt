@@ -14,6 +14,7 @@ class LoginViewModel: ViewModel() {
     private lateinit var userId: String
     private lateinit var baseUrl: String
     private var api: VBVApi? = null
+    private var workshop: String = ""
 
     private var _barcode = MutableLiveData<String>()
     //val barcode: LiveData<String>
@@ -46,6 +47,10 @@ class LoginViewModel: ViewModel() {
         userId = id
     }
 
+    fun setWorkshop(value: String) {
+        workshop = value
+    }
+
     fun setBaseUrl(url: String) {
         baseUrl = url
         if (baseUrl.isNotBlank()) api = VBVApi(baseUrl)
@@ -73,13 +78,18 @@ class LoginViewModel: ViewModel() {
     private fun doRequest(event: Event) {
         _message.value = ""
         val currentBarcode = _barcode.value
-        if (currentBarcode == null || currentBarcode.isBlank()) {
+        if (currentBarcode.isNullOrBlank()) {
             _message.value = "NO BARCODE"
             return
         }
 
-        val requestBody = RequestBody(currentBarcode, userId, eventToString(event))
-        //Log.d("XBUG", "Request: $requestBody")
+        val requestBody = RequestBody(
+            barcode = currentBarcode,
+            userid = userId,
+            event = eventToString(event),
+            cut = workshop == "cut",
+            )
+        Log.d("XBUG", "Request: $requestBody")
 
         viewModelScope.launch {
             try {
@@ -91,7 +101,7 @@ class LoginViewModel: ViewModel() {
 
                 _apiStatus.value = response?.status
 
-                //Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
+                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
                 if (_apiStatus.value == STATUS_OK) {
                     _status.value = _currentDocument.value?.status

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.com.programmer.vbvremote.R
@@ -49,6 +48,14 @@ class LoginFragment : Fragment() {
 
         settings = SettingsHelper(requireContext())
         viewModel.setUserId(settings.userID())
+
+        val workshop = settings.read("workshop")
+        if (workshop == "cut") {
+            binding.workshop.text = getString(R.string.workshop_cut)
+        }else if (workshop == "develop") {
+            binding.workshop.text = getString(R.string.workshop_develop)
+        }
+        viewModel.setWorkshop(workshop)
 
         if (settings.baseUrl().isBlank()) settings.setConnectionDefaults()
 

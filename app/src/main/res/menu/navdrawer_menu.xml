@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/selectWorkshopFragment"
+        android:icon="@drawable/baseline_badge_24"
+        android:title="@string/title_select_workshop"/>
+    <item
         android:id="@+id/loginFragment"
         android:icon="@drawable/baseline_task_24"
         android:title="@string/title_login"/>
