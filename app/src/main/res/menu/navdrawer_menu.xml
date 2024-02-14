@@ -4,10 +4,10 @@
         android:id="@+id/selectWorkshopFragment"
         android:icon="@drawable/baseline_badge_24"
         android:title="@string/title_select_workshop"/>
-    <item
-        android:id="@+id/loginFragment"
-        android:icon="@drawable/baseline_task_24"
-        android:title="@string/title_login"/>
+<!--    <item-->
+<!--        android:id="@+id/loginFragment"-->
+<!--        android:icon="@drawable/baseline_task_24"-->
+<!--        android:title="@string/title_login"/>-->
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/baseline_settings_24"
