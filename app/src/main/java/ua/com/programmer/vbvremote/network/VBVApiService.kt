@@ -5,7 +5,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 const val STATUS_OK = "success"
@@ -42,4 +41,6 @@ class VBVApi(baseUrl: String) {
 interface VBVApiService {
     @POST("getorder")
     suspend fun getOrder(@Body body: RequestBody): Response
+    @POST("auth")
+    suspend fun authenticate(@Body body: AuthRequest): AuthResponse
 }

@@ -29,4 +29,6 @@
     <string name="title_select_workshop">Оберіть цех</string>
     <string name="workshop_cut">Цех крою</string>
     <string name="workshop_develop">Цех розробки</string>
+    <string name="auth_success">Користувача авторизовано</string>
+    <string name="auth_error">Користувача на авторизовано. Перевірте налаштування підключення або зверніться до адміністратора.</string>
 </resources>

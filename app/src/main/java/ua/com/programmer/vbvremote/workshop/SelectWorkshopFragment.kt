@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentSelectWorkshopBinding
 import ua.com.programmer.vbvremote.settings.SettingsHelper
@@ -31,15 +32,56 @@ class SelectWorkshopFragment: Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         settings = SettingsHelper(requireContext())
+        viewModel.setUserId(settings.userID())
+        if (settings.baseUrl().isBlank()) settings.setConnectionDefaults()
 
         binding.btnCut.setOnClickListener {
-            settings.write("workshop", "cut")
-            findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
+            if (viewModel.isAuthorized()) {
+                settings.write("workshop", "cut")
+                findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
+            } else {
+                showNotAuthorizedDialog()
+            }
         }
 
         binding.btnDevelop.setOnClickListener {
-            settings.write("workshop", "develop")
-            findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
+            if (viewModel.isAuthorized()) {
+                settings.write("workshop", "develop")
+                findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
+            } else {
+                showNotAuthorizedDialog()
+            }
         }
+
+        viewModel.authorized.observe(viewLifecycleOwner) {
+            binding.authState.visibility = if (it) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun showNotAuthorizedDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.warning)
+            .setMessage(
+                R.string.auth_error
+            )
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, null)
+            .show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val baseUrl = settings.baseUrl()
+        if (baseUrl.isBlank()) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.warning)
+                .setMessage(
+                    R.string.error_no_connection_settings
+                )
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, null)
+                .show()
+        }
+        viewModel.setBaseUrl(baseUrl)
     }
 }

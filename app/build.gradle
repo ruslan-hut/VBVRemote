@@ -60,8 +60,8 @@ dependencies {
     implementation 'com.google.mlkit:barcode-scanning:17.2.0'
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.7.6"
-    implementation "androidx.navigation:navigation-ui-ktx:2.7.6"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
+    implementation "androidx.navigation:navigation-ui-ktx:2.7.7"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"

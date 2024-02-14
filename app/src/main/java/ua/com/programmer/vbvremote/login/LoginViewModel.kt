@@ -28,7 +28,7 @@ class LoginViewModel: ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _currentDocument = MutableLiveData<Document>()
+    private val _currentDocument = MutableLiveData<BarcodeData>()
     //val currentDocument: LiveData<Document> = _currentDocument
 
     private val _message = MutableLiveData<String>()
@@ -89,7 +89,7 @@ class LoginViewModel: ViewModel() {
             event = eventToString(event),
             cut = workshop == "cut",
             )
-        Log.d("XBUG", "Request: $requestBody")
+        Log.d("PRG", "Request: $requestBody")
 
         viewModelScope.launch {
             try {
@@ -101,7 +101,7 @@ class LoginViewModel: ViewModel() {
 
                 _apiStatus.value = response?.status
 
-                Log.d("XBUG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
+                Log.d("PRG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
                 if (_apiStatus.value == STATUS_OK) {
                     _status.value = _currentDocument.value?.status
@@ -111,7 +111,7 @@ class LoginViewModel: ViewModel() {
             }catch (e: Exception){
                 _message.value = "Failure: ${e.message}"
                 _status.value = ""
-                Log.d("XBUG", "event: $event; failure: $e")
+                Log.d("PRG", "event: $event; failure: $e")
             }
         }
 

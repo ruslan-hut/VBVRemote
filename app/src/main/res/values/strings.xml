@@ -30,4 +30,6 @@
     <string name="title_select_workshop">Select workshop</string>
     <string name="workshop_cut">Cutting workshop</string>
     <string name="workshop_develop">Development workshop</string>
+    <string name="auth_success">Authentication successful</string>
+    <string name="auth_error">Authentication error</string>
 </resources>
