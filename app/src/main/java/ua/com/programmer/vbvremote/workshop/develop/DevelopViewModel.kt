@@ -1,4 +1,4 @@
-package ua.com.programmer.vbvremote.login
+package ua.com.programmer.vbvremote.develop
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import ua.com.programmer.vbvremote.network.*
 import java.lang.Exception
 
-class LoginViewModel: ViewModel() {
+class DevelopViewModel: ViewModel() {
 
     private lateinit var userId: String
     private lateinit var baseUrl: String

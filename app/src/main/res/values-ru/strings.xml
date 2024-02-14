@@ -32,4 +32,7 @@
     <string name="auth_success">Користувача авторизовано</string>
     <string name="auth_error">Користувача на авторизовано. Перевірте налаштування підключення або зверніться до адміністратора.</string>
     <string name="boss_screen">Екран керівника</string>
+    <string name="boss">Керівник</string>
+    <string name="employee">Робітник</string>
+    <string name="employee_screen">Екран робітника</string>
 </resources>

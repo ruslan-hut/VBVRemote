@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentBossBinding
 
@@ -26,5 +28,28 @@ class BossFragment: Fragment() {
 
         binding.bossViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        val pager = ViewPagerAdapter(this)
+        binding.container.adapter = pager
+        TabLayoutMediator(binding.screenTabs, binding.container) { tab, position ->
+            tab.text = when (position) {
+                1 -> getString(R.string.employee)
+                else -> getString(R.string.boss)
+            }
+        }.attach()
     }
+}
+
+private class ViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+
+    override fun getItemCount(): Int = 2
+
+    override fun createFragment(position: Int): Fragment {
+        val fragment: Fragment = when (position) {
+            1 -> DocumentsWork()
+            else -> DocumentsPlan()
+        }
+        return fragment
+    }
+
 }

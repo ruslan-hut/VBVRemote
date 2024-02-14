@@ -41,7 +41,7 @@ class SelectWorkshopFragment: Fragment() {
                 if (viewModel.isBoss()) {
                     findNavController().navigate(R.id.action_selectWorkshopFragment_to_bossFragment)
                 } else {
-                    findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_selectWorkshopFragment_to_cutFragment)
                 }
             } else {
                 showNotAuthorizedDialog()
@@ -51,11 +51,7 @@ class SelectWorkshopFragment: Fragment() {
         binding.btnDevelop.setOnClickListener {
             if (viewModel.isAuthorized()) {
                 settings.write("workshop", "develop")
-                if (viewModel.isBoss()) {
-                    findNavController().navigate(R.id.action_selectWorkshopFragment_to_bossFragment)
-                } else {
-                    findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
-                }
+                findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
             } else {
                 showNotAuthorizedDialog()
             }

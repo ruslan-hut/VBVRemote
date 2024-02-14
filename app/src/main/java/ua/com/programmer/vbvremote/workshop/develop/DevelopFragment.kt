@@ -1,4 +1,4 @@
-package ua.com.programmer.vbvremote.login
+package ua.com.programmer.vbvremote.develop
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,10 +16,10 @@ import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
 
-class LoginFragment : Fragment() {
+class DevelopFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: DevelopViewModel by viewModels()
 
     private lateinit var settings: SettingsHelper
 
