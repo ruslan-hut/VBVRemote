@@ -31,5 +31,12 @@
         <action
             android:id="@+id/action_selectWorkshopFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_selectWorkshopFragment_to_bossFragment"
+            app:destination="@id/bossFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bossFragment"
+        android:name="ua.com.programmer.vbvremote.boss.BossFragment"
+        android:label="@string/boss_screen" />
 </navigation>

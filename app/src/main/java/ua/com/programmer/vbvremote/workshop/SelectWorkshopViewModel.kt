@@ -15,6 +15,8 @@ class SelectWorkshopViewModel: ViewModel() {
     private lateinit var baseUrl: String
     private var api: VBVApi? = null
 
+    private var isBoss = false
+
     private val _authorized = MutableLiveData<Boolean>()
     val authorized: LiveData<Boolean>
         get() = _authorized
@@ -27,6 +29,7 @@ class SelectWorkshopViewModel: ViewModel() {
             try {
                 val response = api!!.retrofitService.authenticate(authRequest)
                 _authorized.value = response.status == "success"
+                isBoss = response.isBoss
                 Log.d("PRG", "Authentication response: $response")
             } catch (e: Exception) {
                 _authorized.value = false
@@ -41,6 +44,10 @@ class SelectWorkshopViewModel: ViewModel() {
             authenticate()
         }
         return authState
+    }
+
+    fun isBoss(): Boolean {
+        return isBoss
     }
 
     fun setUserId(id: String) {

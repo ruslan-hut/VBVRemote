@@ -31,4 +31,5 @@
     <string name="workshop_develop">Цех розробки</string>
     <string name="auth_success">Користувача авторизовано</string>
     <string name="auth_error">Користувача на авторизовано. Перевірте налаштування підключення або зверніться до адміністратора.</string>
+    <string name="boss_screen">Екран керівника</string>
 </resources>
