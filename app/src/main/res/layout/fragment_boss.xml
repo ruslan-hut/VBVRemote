@@ -5,7 +5,7 @@
     <data>
         <variable
             name="bossViewModel"
-            type="ua.com.programmer.vbvremote.boss.BossViewModel" />
+            type="ua.com.programmer.vbvremote.workshop.boss.BossViewModel" />
 
     </data>
 

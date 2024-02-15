@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/bossFragment"
-        android:name="ua.com.programmer.vbvremote.boss.BossFragment"
+        android:name="ua.com.programmer.vbvremote.workshop.boss.BossFragment"
         android:label="@string/boss_screen" />
     <fragment
         android:id="@+id/cutFragment"

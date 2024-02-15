@@ -1,4 +1,4 @@
-package ua.com.programmer.vbvremote.boss
+package ua.com.programmer.vbvremote.workshop.boss
 
 import android.os.Bundle
 import android.view.LayoutInflater
