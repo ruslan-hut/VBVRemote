@@ -104,7 +104,7 @@ class ScannerFragment : Fragment() {
                 provider.bindToLifecycle(this, cameraSelector, imageAnalyzer, preview)
 
             }catch (e: Exception){
-                Log.e("XBUG", "Camera setup failure: $e")
+                Log.e("PRG", "Camera setup failure: $e")
             }
         }, ContextCompat.getMainExecutor(context))
 
@@ -114,7 +114,7 @@ class ScannerFragment : Fragment() {
         try {
             cameraProvider.get().unbindAll()
         }catch (e: Exception){
-            Log.e("XBUG", "Stop camera failure: $e")
+            Log.e("PRG", "Stop camera failure: $e")
         }
     }
 

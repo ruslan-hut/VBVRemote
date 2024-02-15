@@ -9,7 +9,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ua.com.programmer.vbvremote.network.AuthRequest
 import ua.com.programmer.vbvremote.network.AuthResponse
+import ua.com.programmer.vbvremote.network.Event
+import ua.com.programmer.vbvremote.network.RequestBody
+import ua.com.programmer.vbvremote.network.Response
 import ua.com.programmer.vbvremote.network.VBVApi
+import ua.com.programmer.vbvremote.network.eventToString
+import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
 import javax.inject.Inject
 
@@ -70,6 +75,35 @@ class SharedViewModel @Inject constructor(
 
     fun isBoss(): Boolean {
         return apiResponse?.isBoss ?: false
+    }
+
+    private fun isCutDepartment(): Boolean {
+        return apiResponse?.isCutDepartment ?: false
+    }
+
+    fun savedBarcode(): String {
+        return settings.read(BARCODE_KEY)
+    }
+
+    fun getOrder(event: Event, onResponse: (Response?) -> Unit) {
+
+        val requestBody = RequestBody(
+            barcode = savedBarcode(),
+            userid = userId,
+            event = eventToString(event),
+            cut = isCutDepartment(),
+        )
+        Log.d("PRG", "Request: $requestBody")
+
+        viewModelScope.launch {
+            try {
+                val response = api?.retrofitService?.getOrder(requestBody)
+                onResponse(response)
+            }catch (e: java.lang.Exception){
+                Log.d("PRG", "event: $event; failure: $e")
+            }
+        }
+
     }
 
 }

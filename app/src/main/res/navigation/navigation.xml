@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="ua.com.programmer.vbvremote.develop.DevelopFragment"
+        android:name="ua.com.programmer.vbvremote.workshop.develop.DevelopFragment"
         android:label="@string/title_login" >
         <action
             android:id="@+id/action_loginFragment_to_scannerFragment"

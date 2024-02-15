@@ -1,4 +1,4 @@
-package ua.com.programmer.vbvremote.develop
+package ua.com.programmer.vbvremote.workshop.develop
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,22 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentLoginBinding
 import ua.com.programmer.vbvremote.network.Event
 import ua.com.programmer.vbvremote.network.STATUS_ERROR
-import ua.com.programmer.vbvremote.settings.BARCODE_KEY
-import ua.com.programmer.vbvremote.settings.SettingsHelper
+import ua.com.programmer.vbvremote.shared.SharedViewModel
 
+@AndroidEntryPoint
 class DevelopFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private val shared: SharedViewModel by activityViewModels()
     private val viewModel: DevelopViewModel by viewModels()
-
-    private lateinit var settings: SettingsHelper
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -46,18 +47,7 @@ class DevelopFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
         }
 
-        settings = SettingsHelper(requireContext())
-        viewModel.setUserId(settings.userID())
-
-        val workshop = settings.read("workshop")
-        if (workshop == "cut") {
-            binding.workshop.text = getString(R.string.workshop_cut)
-        }else if (workshop == "develop") {
-            binding.workshop.text = getString(R.string.workshop_develop)
-        }
-        viewModel.setWorkshop(workshop)
-
-        if (settings.baseUrl().isBlank()) settings.setConnectionDefaults()
+        binding.workshop.text = getString(R.string.workshop_develop)
 
         viewModel.apiStatus.observe(viewLifecycleOwner) {
             if (it == STATUS_ERROR) {
@@ -79,40 +69,27 @@ class DevelopFragment : Fragment() {
         viewModel.resetDocumentData()
         viewModel.setStatus(getString(R.string.api_request_text))
         viewModel.setBarcode(binding.textBarcodeEditText.text.toString())
-        viewModel.requestData(Event.STATUS)
+        shared.getOrder(Event.STATUS, viewModel::onResult)
     }
 
     private fun requestJobPause() {
-        viewModel.requestData(Event.PAUSE)
+        shared.getOrder(Event.PAUSE, viewModel::onResult)
     }
 
     private fun requestJobStart() {
-        viewModel.requestData(Event.START)
+        shared.getOrder(Event.START, viewModel::onResult)
     }
 
     private fun requestJobFinish() {
-        viewModel.requestData(Event.STOP)
+        shared.getOrder(Event.STOP, viewModel::onResult)
     }
 
     override fun onResume() {
         super.onResume()
 
-        val baseUrl = settings.baseUrl()
-        if (baseUrl.isBlank()) {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.warning)
-                .setMessage(
-                    R.string.error_no_connection_settings
-                )
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, null)
-                .show()
-        }
-        viewModel.setBaseUrl(baseUrl)
-
         val currentText = binding.textBarcodeEditText.text.toString()
         if (currentText.isBlank()) {
-            val barcode = settings.read(BARCODE_KEY)
+            val barcode = shared.savedBarcode()
             if (barcode.isNotBlank()) {
                 viewModel.setBarcode(barcode)
                 binding.textBarcodeEditText.setText(barcode)

@@ -1,20 +1,15 @@
-package ua.com.programmer.vbvremote.develop
+package ua.com.programmer.vbvremote.workshop.develop
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ua.com.programmer.vbvremote.network.*
-import java.lang.Exception
+import javax.inject.Inject
 
-class DevelopViewModel: ViewModel() {
-
-    private lateinit var userId: String
-    private lateinit var baseUrl: String
-    private var api: VBVApi? = null
-    private var workshop: String = ""
+@HiltViewModel
+class DevelopViewModel @Inject constructor(): ViewModel() {
 
     private var _barcode = MutableLiveData<String>()
     //val barcode: LiveData<String>
@@ -29,7 +24,6 @@ class DevelopViewModel: ViewModel() {
         get() = _status
 
     private val _currentDocument = MutableLiveData<BarcodeData>()
-    //val currentDocument: LiveData<Document> = _currentDocument
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
@@ -43,25 +37,8 @@ class DevelopViewModel: ViewModel() {
         resetDocumentData()
     }
 
-    fun setUserId(id: String) {
-        userId = id
-    }
-
-    fun setWorkshop(value: String) {
-        workshop = value
-    }
-
-    fun setBaseUrl(url: String) {
-        baseUrl = url
-        if (baseUrl.isNotBlank()) api = VBVApi(baseUrl)
-    }
-
     fun setBarcode(value: String) {
         _barcode.value = value
-    }
-
-    fun requestData(event: Event) {
-        doRequest(event)
     }
 
     fun resetDocumentData() {
@@ -75,46 +52,19 @@ class DevelopViewModel: ViewModel() {
         _status.value = text
     }
 
-    private fun doRequest(event: Event) {
-        _message.value = ""
-        val currentBarcode = _barcode.value
-        if (currentBarcode.isNullOrBlank()) {
-            _message.value = "NO BARCODE"
-            return
+    fun onResult(response: Response?) {
+        resetDocumentData()
+        _currentDocument.value = response?.document
+        _message.value = _currentDocument.value?.message
+
+        _apiStatus.value = response?.status
+
+        Log.d("PRG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
+
+        if (_apiStatus.value == STATUS_OK) {
+            _status.value = _currentDocument.value?.status
+            _number.value = _currentDocument.value?.number
         }
-
-        val requestBody = RequestBody(
-            barcode = currentBarcode,
-            userid = userId,
-            event = eventToString(event),
-            cut = workshop == "cut",
-            )
-        Log.d("PRG", "Request: $requestBody")
-
-        viewModelScope.launch {
-            try {
-                val response = api?.retrofitService?.getOrder(requestBody)
-
-                resetDocumentData()
-                _currentDocument.value = response?.document
-                _message.value = _currentDocument.value?.message
-
-                _apiStatus.value = response?.status
-
-                Log.d("PRG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
-
-                if (_apiStatus.value == STATUS_OK) {
-                    _status.value = _currentDocument.value?.status
-                    _number.value = _currentDocument.value?.number
-                }
-
-            }catch (e: Exception){
-                _message.value = "Failure: ${e.message}"
-                _status.value = ""
-                Log.d("PRG", "event: $event; failure: $e")
-            }
-        }
-
     }
 
 }

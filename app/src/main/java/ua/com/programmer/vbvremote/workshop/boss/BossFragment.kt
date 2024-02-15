@@ -18,7 +18,7 @@ import ua.com.programmer.vbvremote.shared.SharedViewModel
 @AndroidEntryPoint
 class BossFragment: Fragment() {
 
-    private  val shared: SharedViewModel by activityViewModels()
+    private val shared: SharedViewModel by activityViewModels()
     private val viewModel: BossViewModel by viewModels()
     private lateinit var binding: FragmentBossBinding
 
