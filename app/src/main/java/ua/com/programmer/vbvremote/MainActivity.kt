@@ -2,19 +2,30 @@ package ua.com.programmer.vbvremote
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import dagger.hilt.android.AndroidEntryPoint
 import ua.com.programmer.vbvremote.databinding.ActivityMainNavBinding
+import ua.com.programmer.vbvremote.shared.SharedViewModel
 
 private lateinit var drawerLayout: DrawerLayout
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private  val shared: SharedViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainNavBinding>(this, R.layout.activity_main_nav)
+
+        // this will try to authorize and get user data into shared model
+        shared.isAuthorized()
 
         drawerLayout = binding.drawerLayout
 

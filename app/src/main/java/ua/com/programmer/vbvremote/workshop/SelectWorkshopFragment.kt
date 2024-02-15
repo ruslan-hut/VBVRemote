@@ -6,19 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentSelectWorkshopBinding
-import ua.com.programmer.vbvremote.settings.SettingsHelper
+import ua.com.programmer.vbvremote.shared.SharedViewModel
 
 class SelectWorkshopFragment: Fragment() {
 
+    private  val shared: SharedViewModel by activityViewModels()
     private val viewModel: SelectWorkshopViewModel by viewModels()
     private lateinit var binding: FragmentSelectWorkshopBinding
-
-    private lateinit var settings: SettingsHelper
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -31,14 +31,9 @@ class SelectWorkshopFragment: Fragment() {
         binding.selectWorkshopViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        settings = SettingsHelper(requireContext())
-        viewModel.setUserId(settings.userID())
-        if (settings.baseUrl().isBlank()) settings.setConnectionDefaults()
-
         binding.btnCut.setOnClickListener {
-            if (viewModel.isAuthorized()) {
-                settings.write("workshop", "cut")
-                if (viewModel.isBoss()) {
+            if (shared.isAuthorized()) {
+                if (shared.isBoss()) {
                     findNavController().navigate(R.id.action_selectWorkshopFragment_to_bossFragment)
                 } else {
                     findNavController().navigate(R.id.action_selectWorkshopFragment_to_cutFragment)
@@ -49,15 +44,14 @@ class SelectWorkshopFragment: Fragment() {
         }
 
         binding.btnDevelop.setOnClickListener {
-            if (viewModel.isAuthorized()) {
-                settings.write("workshop", "develop")
+            if (shared.isAuthorized()) {
                 findNavController().navigate(R.id.action_selectWorkshopFragment_to_loginFragment)
             } else {
                 showNotAuthorizedDialog()
             }
         }
 
-        viewModel.authorized.observe(viewLifecycleOwner) {
+        shared.authorized.observe(viewLifecycleOwner) {
             binding.authState.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
@@ -73,19 +67,4 @@ class SelectWorkshopFragment: Fragment() {
             .show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val baseUrl = settings.baseUrl()
-        if (baseUrl.isBlank()) {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.warning)
-                .setMessage(
-                    R.string.error_no_connection_settings
-                )
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, null)
-                .show()
-        }
-        viewModel.setBaseUrl(baseUrl)
-    }
 }
