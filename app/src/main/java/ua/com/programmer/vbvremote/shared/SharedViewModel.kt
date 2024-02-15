@@ -117,6 +117,11 @@ class SharedViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val response = api?.retrofitService?.barcode(requestBody)
+                if (response?.status == STATUS_ERROR) {
+                    Log.w("PRG", "Barcode response: $response")
+                }else {
+                    Log.d("PRG", "Barcode response: $response")
+                }
                 onResponse(response)
             }catch (e: java.lang.Exception){
                 Log.e("PRG", "event: $event; failure: $e")
