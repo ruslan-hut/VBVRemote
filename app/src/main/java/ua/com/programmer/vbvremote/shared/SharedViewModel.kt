@@ -16,7 +16,6 @@ import ua.com.programmer.vbvremote.network.DocumentData
 import ua.com.programmer.vbvremote.network.BarcodeResponse
 import ua.com.programmer.vbvremote.network.DocumentRequest
 import ua.com.programmer.vbvremote.network.DocumentResponse
-import ua.com.programmer.vbvremote.network.ErrorMessage
 import ua.com.programmer.vbvremote.network.ResponseData
 import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.network.VBVApi
