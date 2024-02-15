@@ -52,14 +52,12 @@ class DevelopViewModel @Inject constructor(): ViewModel() {
         _status.value = text
     }
 
-    fun onResult(response: Response?) {
+    fun onResult(response: BarcodeResponse?) {
         resetDocumentData()
         _currentDocument.value = response?.document
         _message.value = _currentDocument.value?.message
 
         _apiStatus.value = response?.status
-
-        Log.d("PRG", "Response: status: ${_apiStatus.value} ; data: ${_currentDocument.value}")
 
         if (_apiStatus.value == STATUS_OK) {
             _status.value = _currentDocument.value?.status

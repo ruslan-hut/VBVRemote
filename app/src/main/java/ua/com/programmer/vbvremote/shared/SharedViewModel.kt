@@ -9,9 +9,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ua.com.programmer.vbvremote.network.AuthRequest
 import ua.com.programmer.vbvremote.network.AuthResponse
+import ua.com.programmer.vbvremote.network.Document
 import ua.com.programmer.vbvremote.network.Event
-import ua.com.programmer.vbvremote.network.RequestBody
-import ua.com.programmer.vbvremote.network.Response
+import ua.com.programmer.vbvremote.network.BarcodeRequest
+import ua.com.programmer.vbvremote.network.DocumentData
+import ua.com.programmer.vbvremote.network.BarcodeResponse
+import ua.com.programmer.vbvremote.network.DocumentRequest
+import ua.com.programmer.vbvremote.network.DocumentResponse
+import ua.com.programmer.vbvremote.network.ErrorMessage
+import ua.com.programmer.vbvremote.network.ResponseData
+import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.network.VBVApi
 import ua.com.programmer.vbvremote.network.eventToString
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
@@ -33,6 +40,10 @@ class SharedViewModel @Inject constructor(
     val authorized: LiveData<Boolean>
         get() = _authorized
 
+    private val _documentsPlan = MutableLiveData<List<Document>>()
+    val documentsPlan: LiveData<List<Document>>
+        get() = _documentsPlan
+
     private fun initApi(): Boolean {
         val currentId = settings.userID()
         val currentUrl = settings.baseUrl()
@@ -49,14 +60,23 @@ class SharedViewModel @Inject constructor(
         return api != null
     }
 
+    private fun loadUserData(data: ResponseData) {
+        _documentsPlan.value = data.plan
+    }
+
     private fun authenticate() {
         if (!initApi()) return
         if (_authorized.value == true) return
         val authRequest = AuthRequest(userId)
         viewModelScope.launch {
             try {
+
                 apiResponse = api!!.retrofitService.authenticate(authRequest)
+
                 _authorized.value = apiResponse?.status == "success"
+
+                if (apiResponse?.data != null) loadUserData(apiResponse!!.data!!)
+
                 Log.d("PRG", "Authentication response: $apiResponse")
             } catch (e: Exception) {
                 _authorized.value = false
@@ -85,22 +105,48 @@ class SharedViewModel @Inject constructor(
         return settings.read(BARCODE_KEY)
     }
 
-    fun getOrder(event: Event, onResponse: (Response?) -> Unit) {
+    fun barcode(event: Event, onResponse: (BarcodeResponse?) -> Unit) {
 
-        val requestBody = RequestBody(
+        val requestBody = BarcodeRequest(
             barcode = savedBarcode(),
             userid = userId,
             event = eventToString(event),
             cut = isCutDepartment(),
         )
-        Log.d("PRG", "Request: $requestBody")
+        Log.d("PRG", "Barcode: $requestBody")
 
         viewModelScope.launch {
             try {
-                val response = api?.retrofitService?.getOrder(requestBody)
+                val response = api?.retrofitService?.barcode(requestBody)
                 onResponse(response)
             }catch (e: java.lang.Exception){
-                Log.d("PRG", "event: $event; failure: $e")
+                Log.e("PRG", "event: $event; failure: $e")
+            }
+        }
+
+    }
+
+    fun processDocumentsAuto(documents: List<Document>, onResponse: (DocumentResponse?) -> Unit) {
+
+        val requestBody = DocumentRequest(
+            userid = userId,
+            event = "automatic_distrib",
+            cut = isCutDepartment(),
+            data = DocumentData(documents)
+        )
+        Log.d("PRG", "Documents: $requestBody")
+
+        viewModelScope.launch {
+            try {
+                val response = api?.retrofitService?.documents(requestBody)
+                if (response?.data != null) loadUserData(response.data)
+                onResponse(response)
+            }catch (e: java.lang.Exception){
+                Log.e("PRG", "processDocumentsAuto: failure: $e")
+                val response = DocumentResponse(
+                    status = STATUS_ERROR,
+                )
+                onResponse(response)
             }
         }
 

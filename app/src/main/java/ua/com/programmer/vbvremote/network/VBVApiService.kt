@@ -40,7 +40,9 @@ class VBVApi(baseUrl: String) {
 
 interface VBVApiService {
     @POST("getorder")
-    suspend fun getOrder(@Body body: RequestBody): Response
+    suspend fun barcode(@Body body: BarcodeRequest): BarcodeResponse
     @POST("auth")
     suspend fun authenticate(@Body body: AuthRequest): AuthResponse
+    @POST("cutwork")
+    suspend fun documents(@Body body: DocumentRequest): DocumentResponse
 }

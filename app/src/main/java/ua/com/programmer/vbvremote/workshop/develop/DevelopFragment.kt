@@ -69,19 +69,19 @@ class DevelopFragment : Fragment() {
         viewModel.resetDocumentData()
         viewModel.setStatus(getString(R.string.api_request_text))
         viewModel.setBarcode(binding.textBarcodeEditText.text.toString())
-        shared.getOrder(Event.STATUS, viewModel::onResult)
+        shared.barcode(Event.STATUS, viewModel::onResult)
     }
 
     private fun requestJobPause() {
-        shared.getOrder(Event.PAUSE, viewModel::onResult)
+        shared.barcode(Event.PAUSE, viewModel::onResult)
     }
 
     private fun requestJobStart() {
-        shared.getOrder(Event.START, viewModel::onResult)
+        shared.barcode(Event.START, viewModel::onResult)
     }
 
     private fun requestJobFinish() {
-        shared.getOrder(Event.STOP, viewModel::onResult)
+        shared.barcode(Event.STOP, viewModel::onResult)
     }
 
     override fun onResume() {

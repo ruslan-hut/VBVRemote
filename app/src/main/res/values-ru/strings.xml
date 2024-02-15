@@ -35,4 +35,11 @@
     <string name="boss">Керівник</string>
     <string name="employee">Робітник</string>
     <string name="employee_screen">Екран робітника</string>
+    <string name="mode_manual">Ручний розподіл</string>
+    <string name="mode_auto">Автоматичний розподіл</string>
+    <string name="processed_documents">Розподілені документи</string>
+    <string name="error_no_response">Від сервера не отримано відповіді. Спробуйте ще раз через деякий час.</string>
+    <string name="error_nothing_selected">Нічого не відмічено</string>
+    <string name="no_data">Немає даних</string>
+    <string name="date_plan">Планова дата</string>
 </resources>
