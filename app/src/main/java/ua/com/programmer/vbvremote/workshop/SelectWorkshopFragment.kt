@@ -39,7 +39,8 @@ class SelectWorkshopFragment: Fragment() {
                     findNavController().navigate(R.id.action_selectWorkshopFragment_to_cutFragment)
                 }
             } else {
-                showNotAuthorizedDialog()
+                findNavController().navigate(R.id.action_selectWorkshopFragment_to_dateTimePicker)
+                //showNotAuthorizedDialog()
             }
         }
 

@@ -44,4 +44,9 @@
     <string name="no_data">No data</string>
     <string name="date_plan">Plan date</string>
     <string name="holder_text" translatable="false">...</string>
+    <string name="date_time_picker">Date and time</string>
+    <string name="table">Table</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="save">Save</string>
 </resources>

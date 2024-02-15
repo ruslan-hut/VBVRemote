@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_selectWorkshopFragment_to_cutFragment"
             app:destination="@id/cutFragment" />
+        <action
+            android:id="@+id/action_selectWorkshopFragment_to_dateTimePicker"
+            app:destination="@id/dateTimePicker" />
     </fragment>
     <fragment
         android:id="@+id/bossFragment"
@@ -46,4 +49,8 @@
         android:id="@+id/cutFragment"
         android:name="ua.com.programmer.vbvremote.workshop.cut.CutFragment"
         android:label="@string/employee_screen" />
+    <fragment
+        android:id="@+id/dateTimePicker"
+        android:name="ua.com.programmer.vbvremote.ui.DateTimePicker"
+        android:label="@string/date_time_picker" />
 </navigation>

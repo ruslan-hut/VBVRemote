@@ -42,4 +42,9 @@
     <string name="error_nothing_selected">Нічого не відмічено</string>
     <string name="no_data">Немає даних</string>
     <string name="date_plan">Планова дата</string>
+    <string name="date_time_picker">Вибір дати і часу</string>
+    <string name="table">Стіл</string>
+    <string name="date">Дата</string>
+    <string name="time">Час</string>
+    <string name="save">Зберегти</string>
 </resources>
