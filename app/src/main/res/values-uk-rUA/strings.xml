@@ -47,7 +47,8 @@
     <string name="date">Дата</string>
     <string name="time">Час</string>
     <string name="save">Зберегти</string>
-    <string name="select_all_parameters">Потрібно обрати всі параметри</string>
+    <string name="select_all_parameters">Не обрані всі параметри або обрані параметри не коректні.</string>
     <string name="select_table">Вибір стола</string>
     <string name="cancel">Відміна</string>
+    <string name="available_date">Доступні дата та час для обраного столу</string>
 </resources>

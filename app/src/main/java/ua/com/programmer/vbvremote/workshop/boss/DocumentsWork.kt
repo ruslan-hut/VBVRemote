@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentDocumentsListBinding
@@ -19,6 +21,7 @@ class DocumentsWork: Fragment() {
     private val shared: SharedViewModel by activityViewModels()
     private val viewModel: BossViewModel by viewModels()
     private lateinit var binding: FragmentDocumentsListBinding
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -31,6 +34,19 @@ class DocumentsWork: Fragment() {
 
         binding.bossViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        recyclerView = binding.documentsList
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val adapter = ListAdapterPlan(
+            onItemClicked = { },
+            onItemLongClicked = { }
+        )
+        recyclerView.adapter = adapter
+
+        shared.documentsWork.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
         binding.bottomBar.visibility = View.GONE
 

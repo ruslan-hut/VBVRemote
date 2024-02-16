@@ -23,6 +23,8 @@ import ua.com.programmer.vbvremote.network.VBVApi
 import ua.com.programmer.vbvremote.network.eventToString
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
 import ua.com.programmer.vbvremote.settings.SettingsHelper
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -169,5 +171,48 @@ class SharedViewModel @Inject constructor(
 
     }
 
+    fun processDocumentsManual(documents: List<Document>, onResponse: (DocumentResponse?) -> Unit) {
+
+        val requestBody = DocumentRequest(
+            userid = userId,
+            event = "manual_distrib",
+            cut = isCutDepartment(),
+            data = DocumentData(documents)
+        )
+        Log.d("PRG", "Documents: $requestBody")
+
+        viewModelScope.launch {
+            try {
+                val response = api?.retrofitService?.documents(requestBody)
+                if (response?.data != null) loadUserData(response.data)
+                onResponse(response)
+            }catch (e: java.lang.Exception){
+                Log.e("PRG", "processDocumentsManual: failure: $e")
+                val response = DocumentResponse(
+                    status = STATUS_ERROR,
+                )
+                onResponse(response)
+            }
+        }
+
+    }
+
+    fun getTableDate(tableNumber: String): String {
+        return tables.find { it.number == tableNumber }?.date ?: ""
+    }
+
+    fun isValidData(tableNumber: String, date: String, time: String): Boolean {
+        val table = tables.find { it.number == tableNumber } ?: return false
+        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateTime = "$date $time:00"
+        return try {
+            val tableDate = formatter.parse(table.date)
+            val selectedDate = formatter.parse(dateTime)
+            selectedDate?.after(tableDate) ?: false
+        }catch (e: Exception){
+            Log.e("PRG", "isValidData: $e")
+            false
+        }
+    }
 
 }
