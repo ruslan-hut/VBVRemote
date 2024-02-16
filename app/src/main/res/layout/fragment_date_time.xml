@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@string/table"
+                        android:text="@string/not_selected"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                          />
                 </LinearLayout>
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@string/date"
+                        android:text="@string/not_selected"
                         android:textColor="?attr/colorPrimary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                          />
@@ -106,7 +106,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:layout_margin="16dp"
-                        android:text="@string/time"
+                        android:text="@string/not_selected"
                         android:textColor="?attr/colorPrimary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                          />

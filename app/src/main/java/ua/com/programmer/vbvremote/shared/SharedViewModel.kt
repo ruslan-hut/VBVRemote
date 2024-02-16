@@ -18,6 +18,7 @@ import ua.com.programmer.vbvremote.network.DocumentRequest
 import ua.com.programmer.vbvremote.network.DocumentResponse
 import ua.com.programmer.vbvremote.network.ResponseData
 import ua.com.programmer.vbvremote.network.STATUS_ERROR
+import ua.com.programmer.vbvremote.network.Table
 import ua.com.programmer.vbvremote.network.VBVApi
 import ua.com.programmer.vbvremote.network.eventToString
 import ua.com.programmer.vbvremote.settings.BARCODE_KEY
@@ -35,6 +36,9 @@ class SharedViewModel @Inject constructor(
 
     private var apiResponse: AuthResponse? = null
 
+    var selectedDocuments: List<Document> = listOf()
+    var tables: List<Table> = listOf()
+
     private val _authorized = MutableLiveData<Boolean>()
     val authorized: LiveData<Boolean>
         get() = _authorized
@@ -42,6 +46,10 @@ class SharedViewModel @Inject constructor(
     private val _documentsPlan = MutableLiveData<List<Document>>()
     val documentsPlan: LiveData<List<Document>>
         get() = _documentsPlan
+
+    private val _documentsWork = MutableLiveData<List<Document>>()
+    val documentsWork: LiveData<List<Document>>
+        get() = _documentsWork
 
     private fun initApi(): Boolean {
         val currentId = settings.userID()
@@ -60,7 +68,12 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun loadUserData(data: ResponseData) {
-        _documentsPlan.value = data.plan
+        val full = data.documents?.toMutableList() ?: mutableListOf()
+        data.plan?.let { full.addAll(it) }
+        _documentsPlan.value = full
+        _documentsWork.value = data.documents ?: emptyList()
+        selectedDocuments = emptyList()
+        tables = data.tables ?: emptyList()
     }
 
     private fun authenticate() {
@@ -155,5 +168,6 @@ class SharedViewModel @Inject constructor(
         }
 
     }
+
 
 }

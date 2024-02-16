@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -50,6 +51,7 @@ class DocumentsPlan: Fragment() {
         shared.documentsPlan.observe(viewLifecycleOwner) {
             viewModel.onDocumentsReceived(it)
         }
+
         viewModel.currentList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             if (it.isEmpty()) {
@@ -86,6 +88,8 @@ class DocumentsPlan: Fragment() {
                 showNothingToSend()
                 return@setOnClickListener
             }
+            shared.selectedDocuments = adapter.selectedDocuments
+            findNavController().navigate(R.id.action_bossFragment_to_dateTimePicker)
 //            binding.progress.visibility = View.VISIBLE
 //            shared.processDocumentsAuto(adapter.selectedDocuments) {
 //                binding.progress.visibility = View.GONE

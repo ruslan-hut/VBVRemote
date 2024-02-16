@@ -37,14 +37,15 @@
         <action
             android:id="@+id/action_selectWorkshopFragment_to_cutFragment"
             app:destination="@id/cutFragment" />
-        <action
-            android:id="@+id/action_selectWorkshopFragment_to_dateTimePicker"
-            app:destination="@id/dateTimePicker" />
     </fragment>
     <fragment
         android:id="@+id/bossFragment"
         android:name="ua.com.programmer.vbvremote.workshop.boss.BossFragment"
-        android:label="@string/boss_screen" />
+        android:label="@string/boss_screen" >
+        <action
+            android:id="@+id/action_bossFragment_to_dateTimePicker"
+            app:destination="@id/dateTimePicker" />
+    </fragment>
     <fragment
         android:id="@+id/cutFragment"
         android:name="ua.com.programmer.vbvremote.workshop.cut.CutFragment"
