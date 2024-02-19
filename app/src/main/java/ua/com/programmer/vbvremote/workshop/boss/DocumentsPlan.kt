@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentDocumentsListBinding
 import ua.com.programmer.vbvremote.network.DocumentResponse
-import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.network.STATUS_OK
 import ua.com.programmer.vbvremote.shared.SharedViewModel
 

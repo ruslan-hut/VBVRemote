@@ -1,7 +1,6 @@
 package ua.com.programmer.vbvremote.workshop.boss
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentDocumentsListBinding
 import ua.com.programmer.vbvremote.network.Document
 import ua.com.programmer.vbvremote.network.DocumentResponse
-import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.network.STATUS_OK
 import ua.com.programmer.vbvremote.shared.SharedViewModel
 
