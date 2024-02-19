@@ -6,19 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentBossBinding
-import ua.com.programmer.vbvremote.shared.SharedViewModel
 
 @AndroidEntryPoint
 class BossFragment: Fragment() {
 
-    private val shared: SharedViewModel by activityViewModels()
     private val viewModel: BossViewModel by viewModels()
     private lateinit var binding: FragmentBossBinding
 

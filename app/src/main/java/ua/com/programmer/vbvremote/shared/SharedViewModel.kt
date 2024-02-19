@@ -53,6 +53,10 @@ class SharedViewModel @Inject constructor(
     val documentsWork: LiveData<List<Document>>
         get() = _documentsWork
 
+    private val _documentsStatus = MutableLiveData<List<Document>>()
+    val documentsStatus: LiveData<List<Document>>
+        get() = _documentsStatus
+
     private fun initApi(): Boolean {
         val currentId = settings.userID()
         val currentUrl = settings.baseUrl()
@@ -70,10 +74,9 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun loadUserData(data: ResponseData) {
-        val full = data.documents?.toMutableList() ?: mutableListOf()
-        data.plan?.let { full.addAll(it) }
-        _documentsPlan.value = full
+        _documentsPlan.value = data.plan ?: emptyList()
         _documentsWork.value = data.documents ?: emptyList()
+        _documentsStatus.value = data.status ?: emptyList()
         selectedDocuments = emptyList()
         tables = data.tables ?: emptyList()
     }

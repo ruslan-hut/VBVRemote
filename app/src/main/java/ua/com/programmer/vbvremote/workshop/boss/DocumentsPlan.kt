@@ -49,7 +49,10 @@ class DocumentsPlan: Fragment() {
         recyclerView.adapter = adapter
 
         shared.documentsPlan.observe(viewLifecycleOwner) {
-            viewModel.onDocumentsReceived(it)
+            viewModel.onDocumentsPlanReceived(it)
+        }
+        shared.documentsStatus.observe(viewLifecycleOwner) {
+            viewModel.onDocumentsStatusReceived(it)
         }
 
         viewModel.currentList.observe(viewLifecycleOwner) {

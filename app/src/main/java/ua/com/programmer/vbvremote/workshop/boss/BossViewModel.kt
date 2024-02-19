@@ -13,28 +13,18 @@ class BossViewModel @Inject constructor(): ViewModel() {
     private val showPlanned = MutableLiveData(false)
     private val docToPlan = MutableLiveData<List<Document>>(listOf())
     private val docPlanned = MutableLiveData<List<Document>>(listOf())
-    val docToWork = MutableLiveData<List<Document>>(listOf())
 
     val currentList = showPlanned.switchMap {
         if (it) docPlanned else docToPlan
     }
     val isPlannedList get() = showPlanned
 
-    fun onDocumentsReceived(documents: List<Document>) {
-        val toPlan = mutableListOf<Document>()
-        val planned = mutableListOf<Document>()
+    fun onDocumentsPlanReceived(documents: List<Document>) {
+        docToPlan.value = documents
+    }
 
-        documents.forEach {
-            if (it.datePlan.isNotEmpty()) {
-                planned.add(it)
-            } else {
-                toPlan.add(it)
-            }
-        }
-
-        docToPlan.value = toPlan
-        docPlanned.value = planned
-
+    fun onDocumentsStatusReceived(documents: List<Document>) {
+        docPlanned.value = documents
     }
 
     fun switchPlanned() {
