@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
+import ua.com.programmer.vbvremote.BuildConfig
 
 const val STATUS_OK = "success"
 const val STATUS_ERROR = "fail"
@@ -29,9 +30,14 @@ class VBVApi(baseUrl: String) {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(logging)
-        .build()
+    private val client = if (BuildConfig.DEBUG) {
+        OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+    } else {
+        OkHttpClient.Builder()
+            .build()
+    }
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

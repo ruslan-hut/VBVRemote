@@ -84,6 +84,8 @@ class ListAdapterPlan (
 
             override fun areItemsTheSame(oldItem: Document, newItem: Document): Boolean {
                 return oldItem.number == newItem.number
+                        && oldItem.status == newItem.status
+                        && oldItem.datePlan == newItem.datePlan
             }
 
             override fun areContentsTheSame(oldItem: Document, newItem: Document): Boolean {

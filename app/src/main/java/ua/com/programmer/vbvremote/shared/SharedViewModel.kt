@@ -16,6 +16,7 @@ import ua.com.programmer.vbvremote.network.DocumentData
 import ua.com.programmer.vbvremote.network.BarcodeResponse
 import ua.com.programmer.vbvremote.network.DocumentRequest
 import ua.com.programmer.vbvremote.network.DocumentResponse
+import ua.com.programmer.vbvremote.network.ErrorMessage
 import ua.com.programmer.vbvremote.network.ResponseData
 import ua.com.programmer.vbvremote.network.STATUS_ERROR
 import ua.com.programmer.vbvremote.network.Table
@@ -81,31 +82,10 @@ class SharedViewModel @Inject constructor(
         tables = data.tables ?: emptyList()
     }
 
-    private fun authenticate() {
-        if (!initApi()) return
-        if (_authorized.value == true) return
-        val authRequest = AuthRequest(userId)
-        viewModelScope.launch {
-            try {
-
-                apiResponse = api!!.retrofitService.authenticate(authRequest)
-
-                _authorized.value = apiResponse?.status == "success"
-
-                if (apiResponse?.data != null) loadUserData(apiResponse!!.data!!)
-
-                Log.d("PRG", "Authentication response: $apiResponse")
-            } catch (e: Exception) {
-                _authorized.value = false
-                Log.e("PRG", "Authentication failed", e)
-            }
-        }
-    }
-
     fun isAuthorized(): Boolean {
         val authState =  _authorized.value ?: false
         if (!authState) {
-            authenticate()
+            authenticate{}
         }
         return authState
     }
@@ -122,6 +102,38 @@ class SharedViewModel @Inject constructor(
         return settings.read(BARCODE_KEY)
     }
 
+    fun authenticate(onResponse: (AuthResponse) -> Unit) {
+        if (!initApi()) {
+            val response = AuthResponse(
+                status = STATUS_ERROR,
+                errors = listOf(ErrorMessage("Помилка в налаштуваннях підключення"))
+            )
+            onResponse(response)
+            return
+        }
+        val authRequest = AuthRequest(userId)
+        viewModelScope.launch {
+            try {
+
+                apiResponse = api!!.retrofitService.authenticate(authRequest)
+
+                apiResponse?.let {
+                    _authorized.value = it.status == "success"
+                    if (it.data != null) loadUserData(apiResponse!!.data!!)
+                    onResponse(it)
+                }
+
+            } catch (e: Exception) {
+                _authorized.value = false
+                Log.e("PRG", "Authentication failed", e)
+                val response = AuthResponse(
+                    status = STATUS_ERROR,
+                )
+                onResponse(response)
+            }
+        }
+    }
+
     fun barcode(event: Event, onResponse: (BarcodeResponse?) -> Unit) {
 
         val requestBody = BarcodeRequest(
@@ -130,16 +142,10 @@ class SharedViewModel @Inject constructor(
             event = eventToString(event),
             cut = isCutDepartment(),
         )
-        Log.d("PRG", "Barcode: $requestBody")
 
         viewModelScope.launch {
             try {
                 val response = api?.retrofitService?.barcode(requestBody)
-                if (response?.status == STATUS_ERROR) {
-                    Log.w("PRG", "Barcode response: $response")
-                }else {
-                    Log.d("PRG", "Barcode response: $response")
-                }
                 onResponse(response)
             }catch (e: java.lang.Exception){
                 Log.e("PRG", "event: $event; failure: $e")
@@ -156,7 +162,6 @@ class SharedViewModel @Inject constructor(
             cut = isCutDepartment(),
             data = DocumentData(documents)
         )
-        Log.d("PRG", "Documents: $requestBody")
 
         viewModelScope.launch {
             try {
@@ -182,7 +187,6 @@ class SharedViewModel @Inject constructor(
             cut = isCutDepartment(),
             data = DocumentData(documents)
         )
-        Log.d("PRG", "Documents: $requestBody")
 
         viewModelScope.launch {
             try {
@@ -208,7 +212,6 @@ class SharedViewModel @Inject constructor(
             cut = isCutDepartment(),
             data = DocumentData(List(1) { document })
         )
-        Log.d("PRG", "updateDocument: $requestBody")
 
         viewModelScope.launch {
             try {

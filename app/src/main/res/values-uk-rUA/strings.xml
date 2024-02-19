@@ -53,4 +53,5 @@
     <string name="available_date">Доступні дата та час для обраного столу</string>
     <string name="success">Виконано успішно</string>
     <string name="change_status">Змінити статус</string>
+    <string name="reload">Оновити</string>
 </resources>

@@ -56,4 +56,5 @@
     <string name="available_date">Available date</string>
     <string name="success">Success</string>
     <string name="change_status">Change status</string>
+    <string name="reload">Reload</string>
 </resources>
