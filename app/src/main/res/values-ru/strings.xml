@@ -51,4 +51,6 @@
     <string name="select_table">Вибір стола</string>
     <string name="cancel">Відміна</string>
     <string name="available_date">Доступні дата та час для обраного столу</string>
+    <string name="success">Виконано успішно</string>
+    <string name="change_status">Змінити статус</string>
 </resources>

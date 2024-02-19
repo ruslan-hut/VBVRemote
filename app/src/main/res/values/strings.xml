@@ -54,4 +54,6 @@
     <string name="select_table">Select table</string>
     <string name="cancel">Cancel</string>
     <string name="available_date">Available date</string>
+    <string name="success">Success</string>
+    <string name="change_status">Change status</string>
 </resources>

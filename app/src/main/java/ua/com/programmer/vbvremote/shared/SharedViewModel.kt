@@ -200,6 +200,32 @@ class SharedViewModel @Inject constructor(
 
     }
 
+    fun updateDocument(document: Document, onResponse: (DocumentResponse?) -> Unit) {
+
+        val requestBody = DocumentRequest(
+            userid = userId,
+            event = "cut_work",
+            cut = isCutDepartment(),
+            data = DocumentData(List(1) { document })
+        )
+        Log.d("PRG", "updateDocument: $requestBody")
+
+        viewModelScope.launch {
+            try {
+                val response = api?.retrofitService?.documents(requestBody)
+                if (response?.data != null) loadUserData(response.data)
+                onResponse(response)
+            }catch (e: java.lang.Exception){
+                Log.e("PRG", "updateDocument: failure: $e")
+                val response = DocumentResponse(
+                    status = STATUS_ERROR,
+                )
+                onResponse(response)
+            }
+        }
+
+    }
+
     fun getTableDate(tableNumber: String): String {
         return tables.find { it.number == tableNumber }?.date ?: ""
     }

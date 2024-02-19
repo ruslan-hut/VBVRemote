@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -17,6 +18,7 @@ import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.FragmentDocumentsListBinding
 import ua.com.programmer.vbvremote.network.DocumentResponse
 import ua.com.programmer.vbvremote.network.STATUS_ERROR
+import ua.com.programmer.vbvremote.network.STATUS_OK
 import ua.com.programmer.vbvremote.shared.SharedViewModel
 
 @AndroidEntryPoint
@@ -120,7 +122,7 @@ class DocumentsPlan: Fragment() {
     }
 
     private fun showResponseResult(response: DocumentResponse) {
-        if (response.status == STATUS_ERROR) {
+        if (response.status != STATUS_OK) {
             val error = response.errors.firstOrNull()?.message ?: ""
             if (error.isNotEmpty()) {
                 MaterialAlertDialogBuilder(requireContext())
@@ -132,6 +134,8 @@ class DocumentsPlan: Fragment() {
             } else {
                 showNoResponse()
             }
+        } else {
+            Toast.makeText(requireContext(), R.string.success, Toast.LENGTH_SHORT).show()
         }
     }
 
