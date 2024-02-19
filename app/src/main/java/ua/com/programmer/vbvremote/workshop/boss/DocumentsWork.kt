@@ -61,13 +61,13 @@ class DocumentsWork: Fragment() {
         val items = List(3) {
             when (it) {
                 0 -> getString(R.string.start)
-                1 -> getString(R.string.pause)
+                1 -> getString(R.string.stop)
                 else -> getString(R.string.finish)
             }
         }
         var checkedItem = when(document.status) {
             "start" -> 0
-            "pause" -> 1
+            "stop" -> 1
             else -> 2
         }
         MaterialAlertDialogBuilder(requireContext())
@@ -78,8 +78,8 @@ class DocumentsWork: Fragment() {
             .setPositiveButton(R.string.ok) { _, _ ->
                 val newStatus = when(checkedItem) {
                     0 -> "start"
-                    1 -> "pause"
-                    else -> "stop"
+                    1 -> "stop"
+                    else -> "finish"
                 }
                 val updated = document.copy(status = newStatus)
                 updateStatus(updated)

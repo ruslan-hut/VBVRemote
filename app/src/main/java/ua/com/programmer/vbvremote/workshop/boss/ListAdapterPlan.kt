@@ -51,8 +51,8 @@ class ListAdapterPlan (
                 statusIcon.setImageResource(
                     when (item.status) {
                         "start" -> R.drawable.baseline_play_arrow_24
-                        "stop" -> R.drawable.baseline_stop_24
-                        "pause" -> R.drawable.baseline_pause_24
+                        "stop" -> R.drawable.baseline_pause_24
+                        "finish" -> R.drawable.baseline_check_circle_24
                         else -> R.drawable.baseline_question_mark_24
                     }
                 )
@@ -70,8 +70,8 @@ class ListAdapterPlan (
                 statusIcon.setImageResource(
                     when (item.status) {
                         "start" -> R.drawable.baseline_play_arrow_24
-                        "stop" -> R.drawable.baseline_stop_24
-                        "pause" -> R.drawable.baseline_pause_24
+                        "stop" -> R.drawable.baseline_pause_24
+                        "finish" -> R.drawable.baseline_check_circle_24
                         else -> R.drawable.baseline_question_mark_24
                     }
                 )

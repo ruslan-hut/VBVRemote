@@ -2,6 +2,7 @@ package ua.com.programmer.vbvremote.settings
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import ua.com.programmer.vbvremote.BuildConfig
 import java.util.*
 
 const val BARCODE_KEY = "key_barcode"
@@ -26,6 +27,7 @@ class SettingsHelper(context: Context) {
     }
 
     fun userID(): String {
+        if (BuildConfig.DEBUG) return "e3b64328-fb07-4d28-ba56-b8adb3f0f0d6"
         return read(userIdKey)
     }
 

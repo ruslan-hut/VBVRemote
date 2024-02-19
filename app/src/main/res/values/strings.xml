@@ -57,4 +57,5 @@
     <string name="success">Success</string>
     <string name="change_status">Change status</string>
     <string name="reload">Reload</string>
+    <string name="stop">Stop</string>
 </resources>

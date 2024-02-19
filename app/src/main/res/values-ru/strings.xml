@@ -54,4 +54,5 @@
     <string name="success">Виконано успішно</string>
     <string name="change_status">Змінити статус</string>
     <string name="reload">Оновити</string>
+    <string name="stop">Зупинити роботу</string>
 </resources>
