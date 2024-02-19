@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ua.com.programmer.vbvremote.R
 import ua.com.programmer.vbvremote.databinding.ElementDocumentPlanBinding
 import ua.com.programmer.vbvremote.databinding.ElementDocumentPlannedBinding
 import ua.com.programmer.vbvremote.databinding.ElementDocumentPlannedWarnBinding
@@ -47,6 +48,14 @@ class ListAdapterPlan (
                 docDate.text = item.date
                 docDatePlan.text = item.datePlan
                 table.text = item.table
+                statusIcon.setImageResource(
+                    when (item.status) {
+                        "start" -> R.drawable.baseline_play_arrow_24
+                        "stop" -> R.drawable.baseline_stop_24
+                        "pause" -> R.drawable.baseline_pause_24
+                        else -> R.drawable.baseline_question_mark_24
+                    }
+                )
             }
         }
     }
@@ -58,6 +67,14 @@ class ListAdapterPlan (
                 docDate.text = item.date
                 docDatePlan.text = item.datePlan
                 table.text = item.table
+                statusIcon.setImageResource(
+                    when (item.status) {
+                        "start" -> R.drawable.baseline_play_arrow_24
+                        "stop" -> R.drawable.baseline_stop_24
+                        "pause" -> R.drawable.baseline_pause_24
+                        else -> R.drawable.baseline_question_mark_24
+                    }
+                )
             }
         }
     }

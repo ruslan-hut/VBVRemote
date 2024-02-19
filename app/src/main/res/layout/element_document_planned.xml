@@ -92,7 +92,17 @@
                 android:gravity="center"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
-                android:text="2" />
+                android:text="@string/holder_text" />
+
+            <ImageView
+                android:id="@+id/status_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_stop_24"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:contentDescription="@string/status" />
 
         </LinearLayout>
 
