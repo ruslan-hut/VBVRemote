@@ -194,7 +194,7 @@ class DateTimePicker: Fragment() {
             .setMessage(
                 R.string.reset_date_time
             )
-            .setCancelable(false)
+            .setCancelable(true)
             .setPositiveButton(R.string.ok) { _, _ ->
                 binding.date.text = "?"
                 binding.time.text = "?"
@@ -208,7 +208,7 @@ class DateTimePicker: Fragment() {
             .setMessage(
                 R.string.set_available_date
             )
-            .setCancelable(false)
+            .setCancelable(true)
             .setPositiveButton(R.string.ok) { _, _ ->
                 val dateTime = binding.tableDate.text.toString()
                 // split date and time, example: 2021-10-01 15:00:00
