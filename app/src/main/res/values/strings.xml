@@ -58,4 +58,7 @@
     <string name="change_status">Change status</string>
     <string name="reload">Reload</string>
     <string name="stop">Stop</string>
+    <string name="reset_date_time">Reset date and time?</string>
+    <string name="reset">Reset</string>
+    <string name="set_available_date">Copy available date and time?</string>
 </resources>

@@ -59,6 +59,12 @@ class DateTimePicker: Fragment() {
         binding.table.setOnClickListener {
             showTableDialog()
         }
+        binding.reset.setOnClickListener {
+            resetDateTime()
+        }
+        binding.tableDate.setOnClickListener {
+            copyDateTime()
+        }
     }
 
     private fun allDataSet(): Boolean {
@@ -180,6 +186,49 @@ class DateTimePicker: Fragment() {
     private fun onTableSelected(tableNumber: String) {
         binding.table.text = tableNumber
         binding.tableDate.text = shared.getTableDate(tableNumber)
+    }
+
+    private fun resetDateTime() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.warning)
+            .setMessage(
+                R.string.reset_date_time
+            )
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                binding.date.text = "?"
+                binding.time.text = "?"
+            }
+            .show()
+    }
+
+    private fun copyDateTime() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.warning)
+            .setMessage(
+                R.string.set_available_date
+            )
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val dateTime = binding.tableDate.text.toString()
+                // split date and time, example: 2021-10-01 15:00:00
+                val parts = dateTime.split(" ")
+                if (parts.size == 2) {
+                    binding.date.text = parts[0]
+                    // remove ending 00 from time like 15:00:00
+                    val time = parts[1].split(":")
+                    if (time.size == 3) {
+                         val timeText = "${time[0]}:${time[1]}"
+                        binding.time.text = timeText
+                    } else {
+                        binding.time.text = "?"
+                    }
+                } else {
+                    binding.date.text = "?"
+                    binding.time.text = "?"
+                }
+            }
+            .show()
     }
 
     private fun formatUnixTimestamp(unixTimestamp: Long): String {

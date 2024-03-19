@@ -55,4 +55,7 @@
     <string name="change_status">Змінити статус</string>
     <string name="reload">Оновити</string>
     <string name="stop">Зупинити роботу</string>
+    <string name="reset_date_time">Видалити дату та час?</string>
+    <string name="reset">Стерти</string>
+    <string name="set_available_date">Скопіювати дату і час?</string>
 </resources>
