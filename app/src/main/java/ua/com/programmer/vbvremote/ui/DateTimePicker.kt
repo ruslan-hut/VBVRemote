@@ -1,7 +1,6 @@
 package ua.com.programmer.vbvremote.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -127,20 +126,28 @@ class DateTimePicker: Fragment() {
     }
 
     private fun showTableDialog() {
+        val table = binding.table.text.toString()
         val items = shared.tables.map { it.number }
         val checkedItems = BooleanArray(items.size)
+
+        val index = items.indexOf(table)
+        if (index != -1) {
+            checkedItems[index] = true
+        } else {
+            checkedItems[0] = true
+        }
+
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.select_table)
             .setSingleChoiceItems(items.toTypedArray(), 0) { _, which ->
-                Log.d("PRG", "showTableDialog: $which")
+                for (i in checkedItems.indices) {
+                    checkedItems[i] = false
+                }
+                checkedItems[which] = true
             }
             .setPositiveButton(R.string.ok) { _, _ ->
-                val selectedTables = mutableListOf<String>()
                 for (i in checkedItems.indices) {
-                    selectedTables.add(items[i])
-                }
-                if (selectedTables.isNotEmpty()) {
-                    onTableSelected(selectedTables[0])
+                    if (checkedItems[i]) onTableSelected(items[i])
                 }
             }
             .setNegativeButton(R.string.cancel, null)
@@ -194,7 +201,7 @@ class DateTimePicker: Fragment() {
             .setMessage(
                 R.string.reset_date_time
             )
-            .setCancelable(true)
+            .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.ok) { _, _ ->
                 binding.date.text = "?"
                 binding.time.text = "?"
@@ -208,7 +215,7 @@ class DateTimePicker: Fragment() {
             .setMessage(
                 R.string.set_available_date
             )
-            .setCancelable(true)
+            .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.ok) { _, _ ->
                 val dateTime = binding.tableDate.text.toString()
                 // split date and time, example: 2021-10-01 15:00:00

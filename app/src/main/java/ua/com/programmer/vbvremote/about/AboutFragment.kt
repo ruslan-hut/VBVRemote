@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import ua.com.programmer.vbvremote.R
@@ -35,6 +36,12 @@ class AboutFragment : Fragment() {
 
         binding.userIdText.setOnLongClickListener {
             sendUserId()
+        }
+        binding.rulesText.setOnClickListener {
+            // launch intent to open link
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = "https://play.google.com/store/apps/developer?id=Ruslan+Khut".toUri()
+            startActivity(intent)
         }
     }
 

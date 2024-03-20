@@ -47,148 +47,139 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="?attr/colorPrimary" />
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:padding="32dp"
-            app:cardBackgroundColor="?android:colorBackground"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/table"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/table"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@string/not_selected"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                         />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/colorPrimaryDark"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@string/not_selected"
-                        android:textColor="?attr/colorPrimary"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                         />
-                </LinearLayout>
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/colorPrimaryDark"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/colorPrimaryDark"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:text="@string/time"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/table"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/table"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@string/not_selected"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            />
+                    </LinearLayout>
+
                     <TextView
-                        android:id="@+id/time"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/colorPrimaryDark"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
                         android:layout_margin="16dp"
-                        android:text="@string/not_selected"
-                        android:textColor="?attr/colorPrimary"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                         />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/colorPrimaryDark"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/date"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@string/not_selected"
+                            android:textColor="?attr/colorPrimary"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/colorPrimaryDark"/>
 
-                    <Button
-                        android:id="@+id/reset"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/reset"
-                        android:textColor="?attr/colorError"
-                        style="?android:attr/buttonBarButtonStyle" />
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:text="@string/time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:layout_margin="16dp"
+                            android:text="@string/not_selected"
+                            android:textColor="?attr/colorPrimary"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            />
+                    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/save"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/colorPrimaryDark"/>
+
+                    <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/save"
-                        style="?android:attr/buttonBarButtonStyle" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <Button
+                            android:id="@+id/reset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/reset"
+                            android:textColor="?attr/colorError"
+                            style="?android:attr/buttonBarButtonStyle" />
+
+                        <Button
+                            android:id="@+id/save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/save"
+                            style="?android:attr/buttonBarButtonStyle" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
+
 
         </androidx.cardview.widget.CardView>
 
