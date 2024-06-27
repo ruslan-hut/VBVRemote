@@ -63,6 +63,7 @@ class SharedViewModel @Inject constructor(
         val currentUrl = settings.baseUrl()
         if (currentId.isBlank() || currentUrl.isBlank()) {
             _authorized.value = false
+            Log.d("PRG", "No user id or base url")
             return false
         }
         if (currentId != userId || currentUrl != baseUrl) {
@@ -70,6 +71,7 @@ class SharedViewModel @Inject constructor(
             baseUrl = currentUrl
             if (baseUrl.isBlank()) settings.setConnectionDefaults()
             api = VBVApi(baseUrl)
+            Log.d("PRG", "API initialized $baseUrl")
         }
         return api != null
     }
@@ -118,6 +120,7 @@ class SharedViewModel @Inject constructor(
                 apiResponse = api!!.retrofitService.authenticate(authRequest)
 
                 apiResponse?.let {
+                    Log.d("PRG", "Authentication status: ${it.status}")
                     _authorized.value = it.status == "success"
                     if (it.data != null) loadUserData(apiResponse!!.data!!)
                     onResponse(it)
