@@ -9,4 +9,12 @@ data class Document(
     @Json(name = "status") val status: String = "",
     @Json(name = "table_number") val table: String = "",
     @Json(name = "warn") val warn: Boolean = false,
+    @Json(name = "products") val products: List<String> = emptyList(),
+    var isExpanded: Boolean = false
 )
+
+fun Document.getContent(): String {
+    //make list copy with added symbol on the beginning of each element
+    val products = products.map { "- $it" }
+    return products.joinToString("\n")
+}

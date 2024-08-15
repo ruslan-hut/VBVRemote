@@ -34,6 +34,12 @@
                     android:orientation="horizontal"
                     android:padding="8dp">
 
+                    <ImageView
+                        android:id="@+id/doc_expand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/expand_document_content"
+                        android:src="@drawable/baseline_arrow_right_24"/>
                     <TextView
                         android:id="@+id/doc_number"
                         android:layout_width="wrap_content"
@@ -80,6 +86,19 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:text="@string/holder_text"/>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/doc_content_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <TextView
+                        android:id="@+id/doc_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </LinearLayout>
 
             </LinearLayout>

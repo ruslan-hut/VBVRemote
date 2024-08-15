@@ -1,6 +1,7 @@
 package ua.com.programmer.vbvremote.workshop.boss
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +12,7 @@ import ua.com.programmer.vbvremote.databinding.ElementDocumentPlanBinding
 import ua.com.programmer.vbvremote.databinding.ElementDocumentPlannedBinding
 import ua.com.programmer.vbvremote.databinding.ElementDocumentPlannedWarnBinding
 import ua.com.programmer.vbvremote.network.Document
+import ua.com.programmer.vbvremote.network.getContent
 
 class ListAdapterPlan (
     private val onItemClicked: (Document) -> Unit,
@@ -37,6 +39,34 @@ class ListAdapterPlan (
                 docMark.setOnClickListener {
                     onSelected(item, docMark.isChecked)
                 }
+                docContent.text = item.getContent()
+                docContentLayout.visibility = if (item.isExpanded) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+                docExpand.setImageResource(
+                    if (item.isExpanded) {
+                        R.drawable.baseline_arrow_drop_down_24
+                    } else {
+                        R.drawable.baseline_arrow_right_24
+                    }
+                )
+                docExpand.setOnClickListener {
+                    item.isExpanded = !item.isExpanded
+                    docContentLayout.visibility = if (item.isExpanded) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+                    docExpand.setImageResource(
+                        if (item.isExpanded) {
+                            R.drawable.baseline_arrow_drop_down_24
+                        } else {
+                            R.drawable.baseline_arrow_right_24
+                        }
+                    )
+                }
             }
         }
     }
@@ -56,6 +86,34 @@ class ListAdapterPlan (
                         else -> R.drawable.baseline_question_mark_24
                     }
                 )
+                docContent.text = item.getContent()
+                docContentLayout.visibility = if (item.isExpanded) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+                docExpand.setImageResource(
+                    if (item.isExpanded) {
+                        R.drawable.baseline_arrow_drop_down_24
+                    } else {
+                        R.drawable.baseline_arrow_right_24
+                    }
+                )
+                docExpand.setOnClickListener {
+                    item.isExpanded = !item.isExpanded
+                    docContentLayout.visibility = if (item.isExpanded) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+                    docExpand.setImageResource(
+                        if (item.isExpanded) {
+                            R.drawable.baseline_arrow_drop_down_24
+                        } else {
+                            R.drawable.baseline_arrow_right_24
+                        }
+                    )
+                }
             }
         }
     }
@@ -75,6 +133,34 @@ class ListAdapterPlan (
                         else -> R.drawable.baseline_question_mark_24
                     }
                 )
+                docContent.text = item.getContent()
+                docContentLayout.visibility = if (item.isExpanded) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+                docExpand.setImageResource(
+                    if (item.isExpanded) {
+                        R.drawable.baseline_arrow_drop_down_24
+                    } else {
+                        R.drawable.baseline_arrow_right_24
+                    }
+                )
+                docExpand.setOnClickListener {
+                    item.isExpanded = !item.isExpanded
+                    docContentLayout.visibility = if (item.isExpanded) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+                    docExpand.setImageResource(
+                        if (item.isExpanded) {
+                            R.drawable.baseline_arrow_drop_down_24
+                        } else {
+                            R.drawable.baseline_arrow_right_24
+                        }
+                    )
+                }
             }
         }
     }
