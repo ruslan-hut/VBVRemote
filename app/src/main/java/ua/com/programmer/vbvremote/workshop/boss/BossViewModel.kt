@@ -1,5 +1,6 @@
 package ua.com.programmer.vbvremote.workshop.boss
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
@@ -20,6 +21,7 @@ class BossViewModel @Inject constructor(): ViewModel() {
     val isPlannedList get() = showPlanned
 
     fun onDocumentsPlanReceived(documents: List<Document>) {
+        Log.d("BossViewModel", "onDocumentsPlanReceived: ${documents.size}")
         docToPlan.value = documents
     }
 

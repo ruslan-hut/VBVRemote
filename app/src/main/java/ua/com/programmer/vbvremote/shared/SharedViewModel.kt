@@ -36,6 +36,7 @@ class SharedViewModel @Inject constructor(
     private var userId: String = ""
     private var baseUrl: String = ""
     private var api: VBVApi? = null
+    private var isExpanded: Boolean = false
 
     private var apiResponse: AuthResponse? = null
 
@@ -248,6 +249,13 @@ class SharedViewModel @Inject constructor(
             Log.e("PRG", "isValidData: $e")
             false
         }
+    }
+
+    fun toggleExpandDocumentContent() {
+        isExpanded = !isExpanded
+        _documentsPlan.value = _documentsPlan.value?.map { it.copy(isExpanded = isExpanded) }
+        _documentsWork.value = _documentsWork.value?.map { it.copy(isExpanded = isExpanded) }
+        _documentsStatus.value = _documentsStatus.value?.map { it.copy(isExpanded = isExpanded) }
     }
 
 }

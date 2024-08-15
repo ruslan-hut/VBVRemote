@@ -67,6 +67,10 @@ class BossFragment: Fragment(), MenuProvider {
             shared.authenticate { showResponseResult(it) }
             return true
         }
+        if (menuItem.itemId == R.id.action_expand) {
+            shared.toggleExpandDocumentContent()
+            return true
+        }
         return false
     }
 
